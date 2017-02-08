@@ -25,4 +25,8 @@ class App < Sinatra::Base
     slim :index
   end
 
+  get "/game" do
+    slim :game
+  end
+
 end
