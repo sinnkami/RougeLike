@@ -21,6 +21,10 @@ class App < Sinatra::Base
     end
   end
 
+  after do
+    cache_control :no_cache
+  end
+
   get "/" do
     slim :index
   end
