@@ -10,26 +10,18 @@ $(function () {
 
   const fps = 30;
 
-  var game_map = new GameMap(32, 32);
-  var window_map = new WindowMap(canvas, { image: image[0], width: 32, height: 32 }, game_map);
+  const game_map = new GameMap(32, 32);
+  const window_map = new WindowMap(canvas, { image: image[0], width: 32, height: 32 }, game_map);
+  const game_key = new GameKey();
+
   var map = game_map.create();
-  var game_key = new GameKey();
-  window_map.context.translate(window_map.canvasWidth/2, window_map.canvasHeight/2);
-  loop: for (var i = 0; i < map.length; i++){
-    for (var j = 0; j < map[i].length; j++){
-      if (map[i][j] == 0){
-        var x = (map[i].length/2 - j)*32;
-        var y = (map.length/2 - i)*32;
+  context.translate(window_map.canvasWidth/2, window_map.canvasHeight/2);
 
-        window_map.context.translate(x, y)
-        map[i][j] = 9;
+  var position = game_map.setPlayer(map);
+  context.translate(position[0], position[1]);
+  var x = -position[0];
+  var y = -position[1];
 
-        break loop
-       }
-    }
-  }
-  x = -x;
-  y = -y;
   var player = new Player(x, y, 32, 32, image[1], game_map.playerNumber);
 
   var age = 0;
@@ -38,8 +30,9 @@ $(function () {
   setInterval(function () {
     age++;
 
-    window_map.init()
+    window_map.init();
     window_map.views(map, 0, 1);
+
     key = game_key.keyEvent($window);
     if (key.shift) {
       window_map.shift(map, player.isMapPosition(map), player.direction.y);
@@ -47,6 +40,7 @@ $(function () {
     }else if (game_map.move(9, key, player)){
       window_map.translate(key);
     }
+
     player.views(context);
   }, 1000/fps);
 })

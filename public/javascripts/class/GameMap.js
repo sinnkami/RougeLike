@@ -58,11 +58,24 @@ class GameMap {
       }
     }
 
-
     actor.isDirection(key);
     actor.isAnimation(x,y);
 
     if (count){ return true; }
     return false;
+  }
+
+  setPlayer(map) {
+    loop: for (var i = 0; i < map.length; i++){
+      for (var j = 0; j < map[i].length; j++){
+        if (map[i][j] == 0){
+          var x = (map[i].length/2 - j)*32;
+          var y = (map.length/2 - i)*32;
+          map[i][j] = 9;
+          return [x,y];
+          break loop;
+         }
+      }
+    }
   }
 }
