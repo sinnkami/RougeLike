@@ -68,7 +68,8 @@ class GameMap {
   setPlayer(map) {
     loop: for (var i = 0; i < map.length; i++){
       for (var j = 0; j < map[i].length; j++){
-        if (map[i][j] == 0){
+        if (map[i][j] == 0 && map[i+1][j] == 0 && map[i-1][j] == 0 && map[i][j+1] == 0 && map[i][j-1] == 0
+          && Math.floor(Math.random() * 100) == 0){
           var x = (map[i].length/2 - j)*32;
           var y = (map.length/2 - i)*32;
           map[i][j] = 9;
@@ -77,5 +78,7 @@ class GameMap {
          }
       }
     }
+
+    return this.setPlayer(map);
   }
 }
