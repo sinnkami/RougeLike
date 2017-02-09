@@ -16,7 +16,7 @@ class WindowMap extends WindowMain {
 
     while (y < mapData.length/2) {
       while (x < mapData[0].length/2) {
-        if (mapData[mapY][mapX] == 0){
+        if (mapData[mapY][mapX] == 0 || mapData[mapY][mapX] == 9){
           this.context.drawImage(
             this.mapChip.image, this.mapChip.width*chipX, this.mapChip.height*chipY, this.mapChip.width, this.mapChip.height,
             this.mapChip.width*x, this.mapChip.height*y, this.mapChip.width, this.mapChip.height
@@ -30,6 +30,7 @@ class WindowMap extends WindowMain {
         x++;
         mapX++;
       }
+
       x = -mapData.length/2
       mapX = 0;
       y++;
