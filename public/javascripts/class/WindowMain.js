@@ -6,7 +6,7 @@ class WindowMain {
   }
 
   init() {
-    this.context.clearRect(-Math.pow(this.canvasWidth, 2), -Math.pow(this.canvasHeight, 2), Math.pow(this.canvasWidth, 2), Math.pow(this.canvasHeight, 2));
+    this.context.clearRect(-Math.pow(this.canvasWidth, 3), -Math.pow(this.canvasHeight, 3), Math.pow(this.canvasWidth, 3), Math.pow(this.canvasHeight, 3));
   }
 
   translate(key) {

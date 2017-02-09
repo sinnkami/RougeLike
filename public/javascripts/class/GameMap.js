@@ -3,11 +3,16 @@ class GameMap {
     this.width = width;
     this.height = height;
 
+    this.playerNumber = 9;
+    this.shiftNumber = 2;
+    this.wallNumber = 1;
+    this.roadNumber = 0;
+
     this.map = [];
     for (var y = 0; y < this.height; y++){
       this.map.push([]);
       for (var x = 0; x < this.width; x++){
-        this.map[y].push(0);
+        this.map[y].push(this.roadNumber);
       }
     }
   }
@@ -36,9 +41,9 @@ class GameMap {
     if (number == 9){
       loop: for (var i = 0; i < this.map.length; i++){
         for (var j = 0; j < this.map[i].length; j++){
-          if (this.map[i][j] == 9 && this.map[i+y][j+x] == 0){
-            this.map[i][j] = 0;
-            this.map[i+y][j+x] = 9;
+          if (this.map[i][j] == this.playerNumber && this.map[i+y][j+x] == this.roadNumber){
+            this.map[i][j] = this.roadNumber;
+            this.map[i+y][j+x] = this.playerNumber;
 
             var count = 32;
 

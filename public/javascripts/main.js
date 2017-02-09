@@ -8,8 +8,10 @@ $(function () {
   const context = canvas.getContext("2d");
   const $window = $(window);
 
-  var window_map = new WindowMap(canvas, { image: image[0], width: 32, height: 32 });
+  const fps = 30;
+
   var game_map = new GameMap(32, 32);
+  var window_map = new WindowMap(canvas, { image: image[0], width: 32, height: 32 }, game_map);
   var map = game_map.create();
   var game_key = new GameKey();
   window_map.context.translate(window_map.canvasWidth/2, window_map.canvasHeight/2);
@@ -28,7 +30,7 @@ $(function () {
   }
   x = -x;
   y = -y;
-  var player = new Player(x, y, 32, 32, image[1]);
+  var player = new Player(x, y, 32, 32, image[1], game_map.playerNumber);
 
   var age = 0;
   var key;
@@ -39,10 +41,12 @@ $(function () {
     window_map.init()
     window_map.views(map, 0, 1);
     key = game_key.keyEvent($window);
-
-    if (game_map.move(9, key, player)){
+    if (key.shift) {
+      window_map.shift(map, player.isMapPosition(map), player.direction.y);
+      player.isDirection(key);
+    }else if (game_map.move(9, key, player)){
       window_map.translate(key);
     }
     player.views(context);
-  }, 1000/30);
+  }, 1000/fps);
 })

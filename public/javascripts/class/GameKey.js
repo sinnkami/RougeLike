@@ -4,7 +4,8 @@ class GameKey {
       up: false,
       down: false,
       right: false,
-      left: false
+      left: false,
+      shift: false
     }
   }
 
@@ -23,6 +24,9 @@ class GameKey {
         case 40:
           this.push.down = true;
           break;
+        case 16:
+          this.push.shift = true;
+          break;
       }
     })
     $window.keyup((event) => {
@@ -38,6 +42,9 @@ class GameKey {
           break;
         case 40:
           this.push.down = false;
+          break;
+        case 16:
+          this.push.shift = false;
           break;
       }
     })

@@ -1,10 +1,12 @@
 class Player {
-  constructor(x, y, width, height, image) {
+  constructor(x, y, width, height, image, number) {
     this.x = x;
     this.y = y;
     this.width = width;
     this.height = height;
     this.image = image;
+
+    this.number = number; // playerのマップ上での数字
 
     this.direction = {
       x: 1,
@@ -45,6 +47,18 @@ class Player {
     }else if (this.direction.x == 2) {
       this.direction.x = 0;
     }
+  }
+
+  isMapPosition(mapData) {
+    for (var y = 0; y < mapData.length; y++){
+      for (var x = 0; x < mapData[y].length; x++){
+        if (mapData[y][x] == this.number){
+          return [x,y];
+        }
+      }
+    }
+
+    throw new Error("playerがいません！！！")
   }
 
   move(x, y) {
