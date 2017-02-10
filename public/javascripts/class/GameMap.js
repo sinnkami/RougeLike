@@ -3,6 +3,8 @@ class GameMap {
     this.width = width;
     this.height = height;
 
+    this.hierarchy = 1;
+
     this.playerNumber = 9;
     this.shiftNumber = 2;
     this.wallNumber = 1;

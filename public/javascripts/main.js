@@ -1,7 +1,11 @@
-var image = [new Image(), new Image()];
+var image = [];
+for (var i = 0; i < 3; i++){
+  image.push(new Image());
+}
 
 image[0].src = "/images/map_chip.png";
 image[1].src = "/images/player.png";
+image[2].src = "/images/window.png";
 
 $(function () {
   const canvas = document.getElementById("canvas");
@@ -11,30 +15,44 @@ $(function () {
   const fps = 30;
 
   const game_map = new GameMap(32, 32);
-  const window_map = new WindowMap(canvas, { image: image[0], width: 32, height: 32 }, game_map);
   const game_key = new GameKey();
 
-  var map = game_map.create();
-  context.translate(window_map.canvasWidth/2, window_map.canvasHeight/2);
+  const window_map = new WindowMap(canvas, { image: image[0], width: 32, height: 32 }, game_map);
+  var window_stairs;
 
-  var position = game_map.setPlayer(map);
-  game_map.setStairs(map);
-  context.translate(position[0], position[1]);
-  var x = -position[0];
-  var y = -position[1];
+  const scene_change = new SceneChange();
 
-  var player = new Player(x, y, 32, 32, image[1], game_map.playerNumber);
+  var result = scene_change.areaChange(context, game_map, window_map);
+  var map = result[1];
+  var player = result[0];
 
   var age = 0;
   var key;
 
   setInterval(function () {
     age++;
+    key = game_key.keyEvent($window);
+    if (scene_change.scene && !scene_change.processing){
+      return;
+    }else if (scene_change.processing) {
+      result = scene_change.areaChange(context, game_map, window_map);
+      map = result[1];
+      player = result[0];
+      scene_change.processing = false;
+      scene_change.scene = false;
+    }
 
     window_map.init();
     window_map.views(map, 0, 1);
 
-    key = game_key.keyEvent($window);
+    player.views(context);
+
+    if (/*scene_change.isStairs(map, game_map.playerNumber + game_map.stairsNumber) &&*/ key.enter) {
+      window_stairs = new WindowStairs(canvas, player.x-canvas.width/2, player.y+120, canvas.width, 100, image[2])
+      scene_change.confirmation(fps, context, key, game_map, window_map, window_stairs, map, player);
+      return
+    }
+
     if (key.shift) {
       window_map.shift(map, player.isMapPosition(map), player.direction.y);
       player.isDirection(key);
@@ -43,7 +61,5 @@ $(function () {
         window_map.translate(key);
       }
     }
-
-    player.views(context);
   }, 1000/fps);
 })
