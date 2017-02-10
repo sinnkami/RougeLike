@@ -22,9 +22,17 @@ class SceneChange {
 
     var self = setInterval(() => {
       if (key.up){
-        number = 0;
+        key.up = false;
+        number--;
+        if (number < 0){
+          number = 1;
+        }
       }else if (key.down) {
-        number = 1;
+        key.down = false;
+        number++;
+        if (number > 1){
+          number = 0;
+        }
       }else if (key.enter) {
         if (number == 1){
           this.scene = false;

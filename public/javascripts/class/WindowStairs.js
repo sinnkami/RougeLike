@@ -17,7 +17,7 @@ class WindowStairs extends WindowMain {
     if (number == 0){
       this.context.fillRect(this.x + 490, this.y + 21, 60, 20);
     }else if (number == 1) {
-      this.context.fillRect(this.x + 490, this.y + 55, 60, 20);
+      this.context.fillRect(this.x + 490, this.y + 55, 80, 20);
     }
 
     // 文字

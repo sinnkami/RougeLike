@@ -13,6 +13,8 @@ class Player {
       y: 0
     }
 
+    this.money = 100000;
+
     this.status = {
       maxHP: 100,
       HP: 100,
