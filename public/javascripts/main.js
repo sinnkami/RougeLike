@@ -18,13 +18,14 @@ $(function () {
   const game_key = new GameKey();
 
   const window_map = new WindowMap(canvas, { image: image[0], width: 32, height: 32 }, game_map);
+  const window_status = new WindowStatus(canvas);
   var window_stairs;
 
   const scene_change = new SceneChange();
 
   var result = scene_change.areaChange(context, game_map, window_map);
   var map = result[1];
-  var player = result[0];
+  player = result[0];
 
   var age = 0;
   var key;
@@ -44,10 +45,11 @@ $(function () {
 
     window_map.init();
     window_map.views(map, 0, 1);
+    window_status.view(player, game_map.hierarchy);
 
     player.views(context);
 
-    if (/*scene_change.isStairs(map, game_map.playerNumber + game_map.stairsNumber) &&*/ key.enter) {
+    if (scene_change.isStairs(map, game_map.playerNumber + game_map.stairsNumber) && key.enter) {
       window_stairs = new WindowStairs(canvas, player.x-canvas.width/2, player.y+120, canvas.width, 100, image[2])
       scene_change.confirmation(fps, context, key, game_map, window_map, window_stairs, map, player);
       return

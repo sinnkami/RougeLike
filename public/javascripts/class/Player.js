@@ -14,7 +14,8 @@ class Player {
     }
 
     this.status = {
-      hp: 100
+      maxHP: 100,
+      HP: 100,
     }
   }
 
