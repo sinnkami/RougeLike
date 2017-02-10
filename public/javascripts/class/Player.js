@@ -58,7 +58,7 @@ class Player {
       }
     }
 
-    throw new Error("playerがいません！！！")
+    throw new Error("playerがいません！？")
   }
 
   move(x, y) {

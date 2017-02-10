@@ -18,6 +18,7 @@ $(function () {
   context.translate(window_map.canvasWidth/2, window_map.canvasHeight/2);
 
   var position = game_map.setPlayer(map);
+  game_map.setStairs(map);
   context.translate(position[0], position[1]);
   var x = -position[0];
   var y = -position[1];
@@ -37,8 +38,10 @@ $(function () {
     if (key.shift) {
       window_map.shift(map, player.isMapPosition(map), player.direction.y);
       player.isDirection(key);
-    }else if (game_map.move(9, key, player)){
-      window_map.translate(key);
+    }else if (age % 3 == 0){
+      if (game_map.move(9, key, player)){
+        window_map.translate(key);
+      }
     }
 
     player.views(context);

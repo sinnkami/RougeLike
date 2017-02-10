@@ -8,6 +8,7 @@ class WindowMap extends WindowMain {
     this.shiftNumber = game_map.shiftNumber;
     this.roadNumber = game_map.roadNumber;
     this.wallNumber = game_map.wallNumber;
+    this.stairsNumber = game_map.stairsNumber;
 
     this.width = Math.floor(this.canvasWidth / this.mapChip.width)
     this.height = Math.floor(this.canvasHeight / this.mapChip.height)
@@ -21,7 +22,12 @@ class WindowMap extends WindowMain {
 
     while (y < mapData.length/2) {
       while (x < mapData[0].length/2) {
-        if (mapData[mapY][mapX] != this.wallNumber){
+        if (mapData[mapY][mapX] == this.stairsNumber + this.playerNumber || mapData[mapY][mapX] == this.stairsNumber){
+          this.context.drawImage(
+            this.mapChip.image, this.mapChip.width*0, this.mapChip.height*2, this.mapChip.width, this.mapChip.height,
+            this.mapChip.width*x, this.mapChip.height*y, this.mapChip.width, this.mapChip.height
+          )
+        }else if(mapData[mapY][mapX] != this.wallNumber){
           this.context.drawImage(
             this.mapChip.image, this.mapChip.width*chipX, this.mapChip.height*chipY, this.mapChip.width, this.mapChip.height,
             this.mapChip.width*x, this.mapChip.height*y, this.mapChip.width, this.mapChip.height

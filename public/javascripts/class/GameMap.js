@@ -7,6 +7,7 @@ class GameMap {
     this.shiftNumber = 2;
     this.wallNumber = 1;
     this.roadNumber = 0;
+    this.stairsNumber = 3;
 
     this.map = [];
     for (var y = 0; y < this.height; y++){
@@ -38,10 +39,34 @@ class GameMap {
     else if (key.left) { x = -1; }
 
 
-    if (number == 9){
+    if (number == this.playerNumber){
       loop: for (var i = 0; i < this.map.length; i++){
         for (var j = 0; j < this.map[i].length; j++){
-          if (this.map[i][j] == this.playerNumber && this.map[i+y][j+x] == this.roadNumber){
+          if (this.map[i][j] == this.stairsNumber + this.playerNumber && this.map[i+y][j+x] == this.roadNumber){
+            this.map[i][j] = this.stairsNumber;
+            this.map[i+y][j+x] = this.playerNumber;
+
+            var count = 32;
+
+            var self = setInterval(() => {
+              actor.move(x, y, key);
+              count--;
+              if (count == 0){ clearInterval(self); }
+            }, 2)
+            break loop;
+          }else if (this.map[i][j] == this.playerNumber && this.map[i+y][j+x] == this.stairsNumber){
+            this.map[i][j] = this.roadNumber;
+            this.map[i+y][j+x] = this.stairsNumber + this.playerNumber;
+
+            var count = 32;
+
+            var self = setInterval(() => {
+              actor.move(x, y, key);
+              count--;
+              if (count == 0){ clearInterval(self); }
+            }, 2)
+            break loop;
+          }else if (this.map[i][j] == this.playerNumber && this.map[i+y][j+x] != this.wallNumber){
             this.map[i][j] = this.roadNumber;
             this.map[i+y][j+x] = this.playerNumber;
 
@@ -80,5 +105,20 @@ class GameMap {
     }
 
     return this.setPlayer(map);
+  }
+
+  setStairs(map) {
+    loop: for (var y = map.length-1; y > 0; y--){
+      for (var x = map[y].length-1; x > 0; x--){
+        if (map[y][x] == this.roadNumber && map[y+1][x] == this.roadNumber && map[y-1][x] == this.roadNumber && map[y][x+1] == this.roadNumber && map[y][x-1] == this.roadNumber && map[y][x] != this.playerNumber
+        && Math.floor(Math.random() * 100) == 0){
+          map[y][x] = this.stairsNumber;
+          return;
+          break loop;
+        }
+      }
+    }
+
+    return this.setStairs(map);
   }
 }
