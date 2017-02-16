@@ -36,6 +36,8 @@ $(function () {
     if (scene_change.scene && !scene_change.processing){
       return;
     }else if (scene_change.processing) {
+      if (scene_change.animation && !scene_change.scene){ return; }
+      if (scene_change.animation && scene_change.scene){ scene_change.areaChangeAnimation(context, canvas, `${game_map.hierarchy}階`, player); return; }
       result = scene_change.areaChange(context, game_map, window_map);
       map = result[1];
       player = result[0];

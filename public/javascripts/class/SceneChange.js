@@ -2,6 +2,7 @@ class SceneChange {
   constructor() {
     this.scene = false;
     this.processing = false;
+    this.animation = false;
   }
 
   isStairs(map, number) {
@@ -41,6 +42,7 @@ class SceneChange {
         }else {
           key.enter = false;
           this.processing = true;
+          this.animation = true;
           clearInterval(self);
         }
       }
@@ -69,4 +71,84 @@ class SceneChange {
 
     return [player, map]
   }
+
+  areaChangeAnimation(context, canvas, text, player) {
+    this.scene = false;
+    canvas.style.backgroundColor = "white";
+    context.clearRect(-1000, -1000, 10000, 10000);
+    context.beginPath();
+    var i = 100;
+    var self = setInterval(() => {
+      this.changeDisplayColor(canvas, i);
+      i--;
+      if (i < 0){
+        this.textInAnimation(canvas, context, text, 0, player);
+        clearInterval(self);
+      }
+    }, 10);
+  }
+
+  changeDisplayColor(canvas, colorCount) {
+    canvas.style.backgroundColor = "hsl(0, 0%, " + colorCount + "%)";
+  }
+  changeDisplayGlobalAlpha(context, count) {
+    context.globalAlpha = count;
+  }
+
+  textInAnimation(canvas, context, text, count, player) {
+    var textOffsetY = count < 60 ? easeOutCubic(count, 30, 30, 60) : 60;
+    context.clearRect(-1000, -1000, 10000, 10000);
+    context.textAlign = "center";
+    context.fillStyle = "white";
+    context.font = "40px normal";
+    context.fillText(text, player.x+5, (player.y-50)+textOffsetY);
+    if (count <= 100){
+      setTimeout(() => {
+        return this.textInAnimation(canvas, context, text, count+1, player);
+      }, 10);
+    }else {
+      return this.textOutAnimation(canvas, context, text, count, player)
+    }
+  }
+
+  textOutAnimation(canvas, context, text, count, player) {
+    var textOffsetY = count < 60 ? easeOutCubic(count, 30, 30, 60) : 60;
+    context.clearRect(-1000, -1000, 10000, 10000);
+    context.textAlign = "center";
+    context.fillStyle = "hsl(0, 0%, " + count + "%)";
+    context.font = "40px normal";
+    context.fillText(text, player.x+5, (player.y-50)+textOffsetY);
+    if (count >= 0){
+      setTimeout(() => {
+        return this.textOutAnimation(canvas, context, text, count-1, player);
+      }, 10);
+    }else {
+      var i = 0;
+      context.globalAlpha = 0.0;
+      canvas.style.backgroundColor = "black";
+
+      this.animation = false;
+
+      var self = setInterval(() => {
+        this.changeDisplayGlobalAlpha(context, i/100);
+        i++;
+        if (i > 100){
+          clearInterval(self);
+        }
+      }, 5);
+    }
+  }
+}
+
+//==============================
+//■イージング関数
+//  t: 0→dの範囲で時間
+//  b: 0の時の値
+//  c: dの時のbとの差
+//  from http://gizma.com/easing/
+//==============================
+function easeOutCubic(t, b, c, d){
+  t /= d;
+  t--;
+  return c*(t*t*t + 1) + b;
 }
