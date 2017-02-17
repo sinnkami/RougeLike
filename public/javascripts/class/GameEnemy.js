@@ -1,0 +1,5 @@
+class GameEnemy {
+  constructor() {
+
+  }
+}
