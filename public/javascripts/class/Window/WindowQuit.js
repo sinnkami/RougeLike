@@ -1,5 +1,5 @@
 class WindowQuit {
-  constructor() {
-
+  init() {
+    console.log(GameManager);
   }
 }

@@ -1,5 +1,5 @@
 class WindowStatus {
-  constructor() {
-
+  init() {
+    console.log(GameManager);
   }
 }

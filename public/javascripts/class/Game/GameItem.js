@@ -1,5 +1,5 @@
 class GameItem {
-  constructor() {
-
+  init() {
+    console.log(GameManager);
   }
 }

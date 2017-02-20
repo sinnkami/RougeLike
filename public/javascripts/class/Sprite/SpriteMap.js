@@ -1,5 +1,0 @@
-class SpriteMap {
-  constructor() {
-
-  }
-}

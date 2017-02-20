@@ -1,0 +1,12 @@
+echo "atom召喚"
+
+atom -n public/javascripts/class/Game/*
+
+atom -n public/javascripts/class/Scene/*
+
+atom -n public/javascripts/class/Sprite/*
+
+atom -n public/javascripts/class/Window/*
+
+atom -n .
+

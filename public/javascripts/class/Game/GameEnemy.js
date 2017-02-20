@@ -1,5 +1,5 @@
 class GameEnemy {
-  constructor() {
-
+  init() {
+    console.log(GameManager);
   }
 }

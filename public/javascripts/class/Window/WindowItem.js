@@ -1,5 +1,5 @@
 class WindowItem {
-  constructor() {
-
+  init() {
+    console.log(GameManager);
   }
 }

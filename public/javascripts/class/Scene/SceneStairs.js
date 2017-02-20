@@ -1,5 +1,5 @@
 class SceneStairs {
-  constructor() {
-
+  init() {
+    console.log(GameManager);
   }
 }

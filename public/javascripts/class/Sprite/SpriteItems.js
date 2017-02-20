@@ -1,5 +1,5 @@
 class SpriteItems {
-  constructor() {
-
+  init() {
+    console.log(GameManager);
   }
 }

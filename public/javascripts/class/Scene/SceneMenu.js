@@ -1,5 +1,5 @@
 class SceneMenu {
-  constructor() {
-
+  init() {
+    console.log(GameManager);
   }
 }

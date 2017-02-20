@@ -1,5 +1,5 @@
 class SpriteStairs {
-  constructor() {
-
+  init() {
+    console.log(GameManager);
   }
 }

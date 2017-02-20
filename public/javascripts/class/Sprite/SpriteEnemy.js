@@ -1,5 +1,5 @@
 class SpriteEnemy {
-  constructor() {
-
+  init() {
+    console.log(GameManager);
   }
 }

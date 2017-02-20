@@ -7,6 +7,12 @@ class WindowBase {
     this.menu = menu;
     this.quit = quit;
     this.status = status;
+    this.x = 0;
+    this.y = 0;
+  }
 
+  translate(x, y) {
+    this.x -= x;
+    this.y -= y;
   }
 }

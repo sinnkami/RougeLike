@@ -1,5 +1,5 @@
 class SceneDamage {
-  constructor() {
-
+  init() {
+    console.log(GameManager);
   }
 }

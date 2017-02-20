@@ -1,5 +1,6 @@
 class GamePlayer {
-  constructor() {
-
+  init() {
+    this.x = 320;
+    this.y = 256;
   }
 }

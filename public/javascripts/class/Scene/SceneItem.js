@@ -1,5 +1,5 @@
 class SceneItem {
-  constructor() {
-
+  init() {
+    console.log(GameManager);
   }
 }

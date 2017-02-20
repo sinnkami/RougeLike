@@ -1,5 +1,5 @@
 class GameSound {
-  constructor() {
-
+  init() {
+    console.log(GameManager);
   }
 }

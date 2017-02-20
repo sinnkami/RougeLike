@@ -1,5 +1,5 @@
 class WindowLogs {
-  constructor() {
-
+  init() {
+    console.log(GameManager);
   }
 }

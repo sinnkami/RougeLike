@@ -1,5 +1,5 @@
 class WindowMenu {
-  constructor() {
-
+  init() {
+    console.log(GameManager);
   }
 }
