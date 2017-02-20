@@ -1,4 +1,4 @@
-class SpriteBase {
+class WindowItem {
   constructor() {
 
   }
