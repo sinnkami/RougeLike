@@ -1,6 +1,8 @@
 class SceneMove {
   init() {
     this.key = GameManager.game.key.input;
+
+    this.age = 0;
   }
 
   event() {
@@ -12,8 +14,11 @@ class SceneMove {
     if (this.key.right) { x += 1; y += 0; }
     if (this.key.left) { x += -1; y += 0; }
 
+    this.age++;
+
     var canMove = GameManager.game.map.canMove(x, y, player.isPosition());
-    if (canMove[0]){
+    player.moveAnime(x, y);
+    if (canMove[0] && this.age % 2 == 0){
       this.moveAnime(x, y);
       player.move(x, y, [canMove[1], canMove[2]]);
     }

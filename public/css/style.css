@@ -9,4 +9,5 @@ a {
   color: #00B7FF; }
 
 canvas {
-  font-family: umefont; }
+  font-family: umefont;
+  background-color: black; }

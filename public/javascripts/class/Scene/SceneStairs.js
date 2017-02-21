@@ -52,6 +52,9 @@ class SceneStairs {
       }else {
         return this.clear();
       }
+    }else if (key.input.back) {
+      key.input.back = false;
+      this.clear();
     }
   }
 }

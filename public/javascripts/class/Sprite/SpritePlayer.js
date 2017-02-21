@@ -1,12 +1,12 @@
 class SpritePlayer {
   init() {
-    console.log(GameManager);
+    this.image = GameManager.game.image.player;
+    this.direction = GameManager.game.player.direction;
+    this.x = GameManager.game.player.x;
+    this.y = GameManager.game.player.y;
   }
 
   draw() {
-    var player = GameManager.game.player;
-    GameManager.context.fillStyle = "red";
-    GameManager.context.fillRect(GameManager.window.x + player.x, GameManager.window.y + player.y, 32, 32);
-    GameManager.context.fillStyle = "black";
+    GameManager.context.drawImage(this.image, 32*Math.floor(this.direction.x), 32*this.direction.y, 32, 32, GameManager.window.x + this.x, GameManager.window.y + this.y, 32, 32);
   }
 }

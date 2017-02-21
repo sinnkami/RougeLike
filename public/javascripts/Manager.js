@@ -19,9 +19,13 @@ class Manager {
   GameStart() {
     this.game.play = true;
 
+    this.game.image.init();
+
     this.game.key.init();
+
     this.scene.move.init();
     this.game.player.init();
+    this.sprite.player.init();
 
     this.init();
   }
@@ -60,6 +64,8 @@ class Manager {
     this.window.x = 0;
     this.window.y = 0;
     this.game.map.create();
+
+    this.window.map.init();
     this.window.map.draw();
   }
 }

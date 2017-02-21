@@ -1,6 +1,15 @@
 class WindowMap {
   init() {
-    console.log(GameManager);
+    this.image = GameManager.game.image.chip;
+
+    this.road = {
+      x: 0,
+      y: 1
+    }
+    this.stairs = {
+      x: 0,
+      y: 2
+    }
   }
 
   draw() {
@@ -9,12 +18,11 @@ class WindowMap {
     GameManager.context.clearRect(GameManager.window.x, GameManager.window.y, GameManager.canvas.width, GameManager.canvas.height);
     for (var y = 0; y < map.data.length; y++){
       for (var x = 0; x < map.data[y].length; x++){
+        if (map.data[y][x] != number.wall){
+          GameManager.context.drawImage(this.image, this.road.x*32, this.road.y*32, 32, 32, x*32, y*32, 32, 32);
+        }
         if (map.data[y][x] == number.stairs || map.data[y][x] == number.stairs + number.player) {
-          GameManager.context.fillStyle = "green";
-          GameManager.context.fillRect(x*32, y*32, 32, 32);
-          GameManager.context.fillStyle = "black";
-        }else if (map.data[y][x] != number.wall){
-          GameManager.context.fillRect(x*32, y*32, 32, 32);
+          GameManager.context.drawImage(this.image, this.stairs.x*32, this.stairs.y*32, 32, 32, x*32, y*32, 32, 32);
         }
       }
     }
