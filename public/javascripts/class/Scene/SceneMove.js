@@ -13,7 +13,6 @@ class SceneMove {
     if (this.key.left) { x += -1; y += 0; }
 
     var canMove = GameManager.game.map.canMove(x, y, player.isPosition());
-    console.log(canMove);
     if (canMove[0]){
       this.moveAnime(x, y);
       player.move(x, y, [canMove[1], canMove[2]]);

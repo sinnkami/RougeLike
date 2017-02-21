@@ -79,15 +79,12 @@ class GameMap {
 
   canMove(x, y, position){
     if (this.data[position[1] + y][position[0] + x] == this.number.stairs){
-      console.log("階段");
       return [true, this.number.stairs + this.number.player, this.number.road];
     }
     if (this.data[position[1]][position[0]] == this.number.stairs + this.number.player && (x || y)){
-      console.log("階段から降りる");
       return [true, this.number.player, this.number.stairs];
     }
     if (this.data[position[1] + y][position[0] + x] == this.number.road){
-      console.log("道");
       return [true, this.number.player, this.number.road];
     }
 
