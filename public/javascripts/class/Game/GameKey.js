@@ -4,7 +4,8 @@ class GameKey {
          up: false,
        down: false,
       right: false,
-       left: false
+       left: false,
+      enter: false
     }
   }
 
@@ -24,6 +25,17 @@ class GameKey {
           break;
         case 39: // right
           this.input.right = true;
+          break;
+
+        // enter
+        case 13: // enter
+          this.input.enter = true;
+          break;
+        case 32: // space
+          this.input.enter = true;
+          break;
+        case 90: // Z
+          this.input.enter = true;
           break;
       }
     })
@@ -45,6 +57,17 @@ class GameKey {
           break;
         case 39: // right
           this.input.right = false;
+          break;
+
+        // enter
+        case 13: // enter
+          this.input.enter = false;
+          break;
+        case 32: // space
+          this.input.enter = false;
+          break;
+        case 90: // Z
+          this.input.enter = false;
           break;
       }
     })

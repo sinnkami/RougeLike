@@ -9,12 +9,14 @@ class Manager {
 
     this.$window = $window;
 
-    this.interval;
+    this.mainInterval;
+    this.menuInterval;
+
     this.FPS = 30;
   }
 
 
-  start() {
+  GameStart() {
     this.game.play = true;
 
     this.game.key.init();
@@ -26,7 +28,11 @@ class Manager {
 
   init() {
     this.mapCreate();
-    this.interval = setInterval(() => {
+    this.startInterval();
+  }
+
+  startInterval() {
+    this.mainInterval = setInterval(() => {
       this.window.map.draw();
 
       this.game.key.event();
@@ -34,6 +40,10 @@ class Manager {
 
       this.sprite.player.draw();
 
+      if (this.scene.stairs.hereStairs() && this.game.key.input.enter){
+        this.game.key.input.enter = false;
+        this.scene.stairs.down();
+      }
       // デバッグ用 =begin
 
 
@@ -41,7 +51,14 @@ class Manager {
     }, 1000/this.FPS);
   }
 
+  stopInterval() {
+    clearInterval(this.mainInterval);
+  }
+
   mapCreate() {
+    this.context.setTransform(1,0,0,1,0,0);
+    this.window.x = 0;
+    this.window.y = 0;
     this.game.map.create();
     this.window.map.draw();
   }

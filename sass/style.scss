@@ -1,8 +1,16 @@
+@font-face {
+  font-family: 'umefont';
+  src: url('/umefont/ume-tmo3.ttf');
+}
+
 body {
   padding: 50px;
-  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
 }
 
 a {
   color: #00B7FF;
+}
+
+canvas {
+  font-family: umefont;
 }
