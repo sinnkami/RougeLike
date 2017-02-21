@@ -2,6 +2,13 @@ class GameMap {
   constructor(width, height) {
     if ( width === undefined) this.width  = 32;
     if (height === undefined) this.height = 32;
+
+    this.number = {
+        road: 0,
+        wall: 1,
+      player: 5,
+      stairs: 9
+    }
   }
 
   init() {
@@ -25,5 +32,65 @@ class GameMap {
     }).create((x, y, type) => {
       this.data[y][x] = type;
     });
+
+    this.setPlayer();
+    this.setStairs();
+    return;
+  }
+
+  setPlayer() {
+    loop: for (var y = 1; y < this.data.length; y++){
+      for (var x = 1; x < this.data.length; x++){
+        if ( // 周囲のマスが道の時の判定 + 乱数
+          this.data[y-1][x-1] == this.number.road && this.data[y-1][x] == this.number.road && this.data[y-1][x+1] == this.number.road &&
+          this.data[y][x-1] == this.number.road && this.data[y][x] == this.number.road && this.data[y][x+1] == this.number.road &&
+          this.data[y+1][x-1] == this.number.road && this.data[y+1][x] == this.number.road && this.data[y+1][x+1] == this.number.road &&
+          Math.floor(Math.random() * 100) == 0
+        ) {
+          GameManager.window.map.move(-(x*32)+GameManager.game.player.x, -(y*32)+GameManager.game.player.y);
+          this.data[y][x] = this.number.player;
+          return;
+          break loop;
+        }
+      }
+    }
+
+    return this.setPlayer();
+  }
+
+  setStairs() {
+    loop: for (var y = this.data.length-1; y > 0; y--){
+      for (var x = this.data.length-1; x > 0; x--){
+        if ( // 周囲のマスが道の時の判定 + 乱数
+          this.data[y-1][x-1] == this.number.road && this.data[y-1][x] == this.number.road && this.data[y-1][x+1] == this.number.road &&
+          this.data[y][x-1] == this.number.road && this.data[y][x] == this.number.road && this.data[y][x+1] == this.number.road &&
+          this.data[y+1][x-1] == this.number.road && this.data[y+1][x] == this.number.road && this.data[y+1][x+1] == this.number.road &&
+          Math.floor(Math.random() * 100) == 0
+        ) {
+          this.data[y][x] = this.number.stairs;
+          return;
+          break loop;
+        }
+      }
+    }
+
+    return this.setStairs();
+  }
+
+  canMove(x, y, position){
+    if (this.data[position[1] + y][position[0] + x] == this.number.stairs){
+      console.log("階段");
+      return [true, this.number.stairs + this.number.player, this.number.road];
+    }
+    if (this.data[position[1]][position[0]] == this.number.stairs + this.number.player && (x || y)){
+      console.log("階段から降りる");
+      return [true, this.number.player, this.number.stairs];
+    }
+    if (this.data[position[1] + y][position[0] + x] == this.number.road){
+      console.log("道");
+      return [true, this.number.player, this.number.road];
+    }
+
+    return [false];
   }
 }
