@@ -43,7 +43,9 @@ class Manager {
       this.scene.move.event();
 
       this.sprite.player.draw();
-
+      for (var i = 0; i < this.game.enemes.length; i++){
+        this.sprite.enemy.draw(this.game.enemes[i]);
+      }
       if (this.scene.stairs.hereStairs() && this.game.key.input.enter){
         this.game.key.input.enter = false;
         this.scene.stairs.down();

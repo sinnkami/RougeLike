@@ -8,5 +8,13 @@ class GameImage {
 
     this.player = new Image();
     this.player.src = "/images/charcter/player.png";
+
+    this.enemes = [new Image()];
+    this.enemes[0].src = "/images/charcter/enemy1.png";
+  }
+
+  enemy() {
+    var rand = Math.floor(Math.random() * this.enemes.length);
+    return this.enemes[rand];
   }
 }

@@ -18,9 +18,16 @@ class SceneMove {
 
     var canMove = GameManager.game.map.canMove(x, y, player.isPosition());
     player.moveAnime(x, y);
+
+    for (var i = 0; i < GameManager.game.enemes.length; i++){
+      GameManager.game.enemes[i].moveAnime(x, y);
+    }
     if (canMove[0] && this.age % 2 == 0){
       this.moveAnime(x, y);
       player.move(x, y, [canMove[1], canMove[2]]);
+      for (var i = 0; i < GameManager.game.enemes.length; i++){
+        GameManager.game.enemes[i].move();
+      }
     }
   }
 

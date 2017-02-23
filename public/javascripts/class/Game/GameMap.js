@@ -7,7 +7,8 @@ class GameMap {
         road: 0,
         wall: 1,
       player: 5,
-      stairs: 9
+      stairs: 9,
+      enemy: -10
     }
   }
 
@@ -35,6 +36,8 @@ class GameMap {
 
     this.setPlayer();
     this.setStairs();
+
+    GameManager.game.enemes.push(this.setEnemy());
     return;
   }
 
@@ -56,6 +59,29 @@ class GameMap {
     }
 
     return this.setPlayer();
+  }
+
+  setEnemy() {
+    loop: for (var y = 1; y < this.data.length; y++){
+      for (var x = 1; x < this.data.length; x++){
+        if ( // 周囲のマスが道の時の判定 + 乱数
+          this.data[y-1][x-1] == this.number.road && this.data[y-1][x] == this.number.road && this.data[y-1][x+1] == this.number.road &&
+          this.data[y][x-1] == this.number.road && this.data[y][x] == this.number.road && this.data[y][x+1] == this.number.road &&
+          this.data[y+1][x-1] == this.number.road && this.data[y+1][x] == this.number.road && this.data[y+1][x+1] == this.number.road &&
+          Math.floor(Math.random() * 100) == 0
+        ) {
+          this.data[y][x] = this.number.enemy;
+          var enemy = new GameEnemy();
+          enemy.init(this.number.enemy);
+
+          this.number.enemy--;
+          return enemy;
+          break loop;
+        }
+      }
+    }
+
+    return this.setEnemy();
   }
 
   setStairs() {
@@ -89,5 +115,19 @@ class GameMap {
     }
 
     return [false];
+  }
+
+  canMoveEnemy(x, y, position, number){
+    if (this.data[position[1] + y][position[0] + x] == this.number.stairs){
+      return [true, this.number.stairs + number, this.number.road];
+    }
+    if (this.data[position[1]][position[0]] == this.number.stairs + number && (x || y)){
+      return [true, number, this.number.stairs];
+    }
+    if (this.data[position[1] + y][position[0] + x] == this.number.road){
+      return [true, number, this.number.road];
+    }
+
+    return false;
   }
 }

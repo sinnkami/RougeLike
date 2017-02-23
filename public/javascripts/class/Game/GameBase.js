@@ -3,7 +3,10 @@ class GameBase {
     this.play = false;
 
     this.image = image;
+
     this.player = player;
+    this.enemes = [];
+
     this.enemy = enemy;
     this.key = key;
     this.item = item;
