@@ -4,7 +4,6 @@ class SpriteEnemy {
   }
 
   draw(enemy) {
-    var position = enemy.isPosition();
-    GameManager.context.drawImage(enemy.image, 32*Math.floor(enemy.direction.x), 32*enemy.direction.y, 32, 32, position[0]*32, position[1]*32, 32, 32);
+    GameManager.context.drawImage(enemy.image, 32*Math.floor(enemy.direction.x), 32*enemy.direction.y, 32, 32, enemy.x, enemy.y, 32, 32);
   }
 }

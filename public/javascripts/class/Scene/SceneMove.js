@@ -7,6 +7,7 @@ class SceneMove {
 
   event() {
     var x = 0, y = 0;
+    var enemes = GameManager.game.enemes;
     var player = GameManager.game.player;
 
     if (this.key.up) { x += 0; y += -1; }
@@ -19,15 +20,15 @@ class SceneMove {
     var canMove = GameManager.game.map.canMove(x, y, player.isPosition());
     player.moveAnime(x, y);
 
-    for (var i = 0; i < GameManager.game.enemes.length; i++){
-      GameManager.game.enemes[i].moveAnime(x, y);
+    for (var i = 0; i < enemes.length; i++){
+      enemes[i].moveAnime(x, y);
     }
     if (canMove[0] && this.age % 2 == 0){
-      this.moveAnime(x, y);
       player.move(x, y, [canMove[1], canMove[2]]);
-      for (var i = 0; i < GameManager.game.enemes.length; i++){
-        GameManager.game.enemes[i].move();
+      for (var i = 0; i < enemes.length; i++){
+        enemes[i].move();
       }
+      this.moveAnime(x, y);
     }
   }
 
@@ -35,8 +36,18 @@ class SceneMove {
     var count = 0;
     var self = setInterval(() => {
       GameManager.window.map.move(-x, -y);
+      for (var i = 0; i < GameManager.game.enemes.length; i++){
+        GameManager.game.enemes[i].x += GameManager.game.enemes[i].moveX;
+        GameManager.game.enemes[i].y += GameManager.game.enemes[i].moveY;
+      }
       count++;
-      if (count == 32){ clearInterval(self); }
+      if (count == 32){
+        for (var i = 0; i < GameManager.game.enemes.length; i++){
+          GameManager.game.enemes[i].moveX = 0;
+          GameManager.game.enemes[i].moveY = 0;          
+        }
+        clearInterval(self);
+      }
     }, 2);
   }
 }

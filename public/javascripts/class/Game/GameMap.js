@@ -36,8 +36,9 @@ class GameMap {
 
     this.setPlayer();
     this.setStairs();
-
-    GameManager.game.enemes.push(this.setEnemy());
+    for (var i = 0; i < Math.ceil(Math.random() * 4); i++){
+      GameManager.game.enemes.push(this.setEnemy());      
+    }
     return;
   }
 

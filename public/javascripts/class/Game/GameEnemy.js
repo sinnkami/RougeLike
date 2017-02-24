@@ -7,6 +7,12 @@ class GameEnemy {
     };
 
     this.image = GameManager.game.image.enemy();
+
+    this.x = 0;
+    this.y = 0;
+
+    this.moveX = 0;
+    this.moveY = 0;
   }
 
   move(){
@@ -16,26 +22,43 @@ class GameEnemy {
     var number;
 
     if (this.direction.y == 0) { // した
-           if (number = this.downMove())  { y =  1; }
+      if (map[position[1]+1][position[0]] == 0 && map[position[1]][position[0]+1] == 0 && map[position[1]][position[0]-1] == 0 && map[position[1]-1][position[0]] == 0 && Math.floor(Math.random() * 3) == 0){
+        if (number = this.leftMove()) { x = -1; }
+      }
+      else if (number = this.downMove())  { y =  1; }
       else if (number = this.rightMove()) { x =  1; }
       else if (number = this.leftMove())  { x = -1; }
       else if (number = this.upMove())    { y = -1; }
     }else if (this.direction.y == 1) { // 左
-           if (number = this.leftMove())  { x = -1; }
+      if (map[position[1]+1][position[0]] == 0 && map[position[1]][position[0]+1] == 0 && map[position[1]][position[0]-1] == 0 && map[position[1]-1][position[0]] == 0 && Math.floor(Math.random() * 3) == 0){
+        if (number = this.upMove()) { y = -1; }
+      }
+      else if (number = this.leftMove())  { x = -1; }
       else if (number = this.downMove())  { y =  1; }
       else if (number = this.upMove())    { y = -1; }
       else if (number = this.rightMove()) { x =  1; }
     }else if (this.direction.y == 2) { // 右
-           if (number = this.rightMove()) { x =  1; }
+      if (map[position[1]+1][position[0]] == 0 && map[position[1]][position[0]+1] == 0 && map[position[1]][position[0]-1] == 0 && map[position[1]-1][position[0]] == 0 && Math.floor(Math.random() * 3) == 0){
+        if (number = this.downMove()) { y = 1; }
+      }
+      else if (number = this.rightMove()) { x =  1; }
       else if (number = this.upMove())    { y = -1; }
       else if (number = this.downMove())  { y =  1; }
       else if (number = this.leftMove())  { x = -1; }
     }else if (this.direction.y == 3) { // 上
-           if (number = this.upMove())    { y = -1; }
+      if (map[position[1]+1][position[0]] == 0 && map[position[1]][position[0]+1] == 0 && map[position[1]][position[0]-1] == 0 && map[position[1]-1][position[0]] == 0 && Math.floor(Math.random() * 3) == 0){
+        if (number = this.rightMove()) { x = 1; }
+      }
+      else if (number = this.upMove())    { y = -1; }
       else if (number = this.leftMove())  { x = -1; }
       else if (number = this.rightMove()) { x =  1; }
       else if (number = this.downMove())  { y =  1; }
     }
+
+    this.x = position[0]*32;
+    this.y = position[1]*32;
+    this.moveX = x;
+    this.moveY = y;
 
     map[position[1] + y][position[0] + x] = number[1];
     map[position[1]][position[0]] = number[2];
@@ -89,5 +112,7 @@ class GameEnemy {
         }
       }
     }
+
+    throw new Error("対象のエネミーがいない！？")
   }
 }
