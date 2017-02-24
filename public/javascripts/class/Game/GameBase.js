@@ -4,6 +4,10 @@ class GameBase {
 
     this.image = image;
 
+    this.hierarchy = 0;
+
+    this.unitOfCurrency = "G";
+
     this.player = player;
     this.enemes = [];
 

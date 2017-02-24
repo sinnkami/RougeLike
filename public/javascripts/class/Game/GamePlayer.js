@@ -7,6 +7,17 @@ class GamePlayer {
       x: 1,
       y: 0
     };
+
+    this.status = {
+      level: 1,
+      nextLevel: 10,
+      exp: 0,
+      untilNowExp: 0,
+      hp: 100,
+      maxhp: 100,
+    }
+
+    this.money = 100;
   }
 
   move(x, y, number){

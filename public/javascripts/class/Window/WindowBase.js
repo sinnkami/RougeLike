@@ -3,7 +3,7 @@ class WindowBase {
     this.item = item;
     this.map = map;
     this.log = log;
-    this.header = header;
+    this.statusBar = header;
     this.menu = menu;
     this.quit = quit;
     this.status = status;

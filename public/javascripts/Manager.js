@@ -38,6 +38,7 @@ class Manager {
   startInterval() {
     this.mainInterval = setInterval(() => {
       this.window.map.draw();
+      this.window.statusBar.draw();
 
       this.game.key.event();
       this.scene.move.event();
@@ -65,6 +66,8 @@ class Manager {
     this.context.setTransform(1,0,0,1,0,0);
     this.window.x = 0;
     this.window.y = 0;
+
+    this.game.hierarchy++;
 
     this.game.enemes = [];
     this.game.map.create();
