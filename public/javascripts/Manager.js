@@ -65,6 +65,8 @@ class Manager {
     this.context.setTransform(1,0,0,1,0,0);
     this.window.x = 0;
     this.window.y = 0;
+
+    this.game.enemes = [];
     this.game.map.create();
 
     this.window.map.init();

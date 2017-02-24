@@ -23,7 +23,13 @@ class GameEnemy {
 
     if (this.direction.y == 0) { // した
       if (map[position[1]+1][position[0]] == 0 && map[position[1]][position[0]+1] == 0 && map[position[1]][position[0]-1] == 0 && map[position[1]-1][position[0]] == 0 && Math.floor(Math.random() * 3) == 0){
-        if (number = this.leftMove()) { x = -1; }
+        if (map[position[1]+1][position[0+1]] == 1){
+          if (number = this.leftMove()) { x = -1; }
+        }else if (map[position[1]+1][position[0-1]] == 1){
+          if (number = this.rightMove()) { x = 1; }
+        }else {
+          return this.move();
+        }
       }
       else if (number = this.downMove())  { y =  1; }
       else if (number = this.rightMove()) { x =  1; }
@@ -31,7 +37,13 @@ class GameEnemy {
       else if (number = this.upMove())    { y = -1; }
     }else if (this.direction.y == 1) { // 左
       if (map[position[1]+1][position[0]] == 0 && map[position[1]][position[0]+1] == 0 && map[position[1]][position[0]-1] == 0 && map[position[1]-1][position[0]] == 0 && Math.floor(Math.random() * 3) == 0){
-        if (number = this.upMove()) { y = -1; }
+        if (map[position[1]-1][position[0]-1] == 1){
+          if (number = this.upMove()) { y = -1; }
+        }else if (map[position[1]+1][position[0]-1] == 1){
+          if (number = this.downMove()) { y = 1; }
+        }else {
+          return this.move();
+        }
       }
       else if (number = this.leftMove())  { x = -1; }
       else if (number = this.downMove())  { y =  1; }
@@ -39,7 +51,13 @@ class GameEnemy {
       else if (number = this.rightMove()) { x =  1; }
     }else if (this.direction.y == 2) { // 右
       if (map[position[1]+1][position[0]] == 0 && map[position[1]][position[0]+1] == 0 && map[position[1]][position[0]-1] == 0 && map[position[1]-1][position[0]] == 0 && Math.floor(Math.random() * 3) == 0){
-        if (number = this.downMove()) { y = 1; }
+        if (map[position[1]+1][position[0]+1] == 1){
+          if (number = this.downMove()) { y = 1; }
+        }else if (map[position[1]-1][position[0]+1] == 1){
+          if (number = this.upMove()) { y = -1; }
+        }else {
+          return this.move();
+        }
       }
       else if (number = this.rightMove()) { x =  1; }
       else if (number = this.upMove())    { y = -1; }
@@ -47,7 +65,13 @@ class GameEnemy {
       else if (number = this.leftMove())  { x = -1; }
     }else if (this.direction.y == 3) { // 上
       if (map[position[1]+1][position[0]] == 0 && map[position[1]][position[0]+1] == 0 && map[position[1]][position[0]-1] == 0 && map[position[1]-1][position[0]] == 0 && Math.floor(Math.random() * 3) == 0){
-        if (number = this.rightMove()) { x = 1; }
+        if (map[position[1]-1][position[0]+1] == 1){
+          if (number = this.rightMove()) { x = 1; }
+        }else if (map[position[1]-1][position[0]-1] == 1){
+          if (number = this.leftMove()) { x = -1; }
+        }else {
+          return this.move();
+        }
       }
       else if (number = this.upMove())    { y = -1; }
       else if (number = this.leftMove())  { x = -1; }

@@ -44,7 +44,7 @@ class SceneMove {
       if (count == 32){
         for (var i = 0; i < GameManager.game.enemes.length; i++){
           GameManager.game.enemes[i].moveX = 0;
-          GameManager.game.enemes[i].moveY = 0;          
+          GameManager.game.enemes[i].moveY = 0;
         }
         clearInterval(self);
       }
