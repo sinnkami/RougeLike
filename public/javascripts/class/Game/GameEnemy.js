@@ -8,8 +8,9 @@ class GameEnemy {
 
     this.image = GameManager.game.image.enemy();
 
-    this.x = 0;
-    this.y = 0;
+    var position = this.isPosition();
+    this.x = position[0]*32;
+    this.y = position[1]*32;
 
     this.moveX = 0;
     this.moveY = 0;
