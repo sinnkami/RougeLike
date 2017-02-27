@@ -112,6 +112,7 @@ class GameEnemy {
 
     this.x = position[0]*32;
     this.y = position[1]*32;
+    
     this.moveX = x;
     this.moveY = y;
 

@@ -2,7 +2,7 @@ class SceneMove {
   init() {
     this.key = GameManager.game.key.input;
 
-    this.age = 0;
+    this.move = false;
   }
 
   event() {
@@ -15,15 +15,13 @@ class SceneMove {
     if (this.key.right) { x += 1; y += 0; }
     if (this.key.left) { x += -1; y += 0; }
 
-    this.age++;
-
     var canMove = GameManager.game.map.canMove(x, y, player.isPosition());
     player.moveAnime(x, y);
 
     for (var i = 0; i < enemes.length; i++){
       enemes[i].moveAnime(x, y);
     }
-    if (canMove[0] && this.age % 2 == 0){
+    if (canMove[0] && !this.move){
       player.move(x, y, [canMove[1], canMove[2]]);
       for (var i = 0; i < enemes.length; i++){
         enemes[i].move();
@@ -33,6 +31,10 @@ class SceneMove {
   }
 
   moveAnime(x, y){
+    if (this.move){
+      return;
+    }
+    this.move = true;
     var count = 0;
     var self = setInterval(() => {
       GameManager.window.map.move(-x, -y);
@@ -42,10 +44,7 @@ class SceneMove {
       }
       count++;
       if (count == 32){
-        for (var i = 0; i < GameManager.game.enemes.length; i++){
-          GameManager.game.enemes[i].moveX = 0;
-          GameManager.game.enemes[i].moveY = 0;
-        }
+        this.move = false;
         clearInterval(self);
       }
     }, 2);
