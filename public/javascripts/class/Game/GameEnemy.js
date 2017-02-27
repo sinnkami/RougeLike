@@ -14,6 +14,8 @@ class GameEnemy {
 
     this.moveX = 0;
     this.moveY = 0;
+
+    this.search = 3;
   }
 
   move(){
@@ -22,7 +24,35 @@ class GameEnemy {
     var x = 0, y = 0;
     var number;
 
-    if (this.direction.y == 0) { // した
+    var result = this.playerNearby(map, position);
+    if (result) {
+      x = result[0];
+      y = result[1];
+
+      if (Math.abs(x) <= Math.abs(y)) {
+        x = 0;
+        y = Math.sign(y);
+      }else {
+        x = Math.sign(x);
+        y = 0;
+      }
+
+      number = GameManager.game.map.canMoveEnemy(x, y, position, this.number);
+      if (!number[0]){
+        number = [false, this.number, this.number];
+        x = 0;
+        y = 0;
+      }
+      if (x < 0){
+        this.direction.y = 1;
+      }else if (x > 0){
+        this.direction.y = 2;
+      }else if (y < 0) {
+        this.direction.y = 3;
+      }else if (y > 0) {
+        this.direction.y = 0;
+      }
+    }else if (this.direction.y == 0) { // した
       if (map[position[1]+1][position[0]] == 0 && map[position[1]][position[0]+1] == 0 && map[position[1]][position[0]-1] == 0 && map[position[1]-1][position[0]] == 0 && Math.floor(Math.random() * 3) == 0){
         if (map[position[1]+1][position[0+1]] == 1){
           if (number = this.leftMove()) { x = -1; }
@@ -87,6 +117,23 @@ class GameEnemy {
 
     map[position[1] + y][position[0] + x] = number[1];
     map[position[1]][position[0]] = number[2];
+  }
+
+  playerNearby(map, position) {
+    var number = GameManager.game.map.number.player;
+    loop: for (var y = -3; y <= this.search; y++){
+      for (var x = -3; x <= this.search; x++){
+        try {
+          if (map[position[1] + y][position[0] + x] == number){
+            return [x, y];
+            break loop;
+          }
+        } catch (e) {
+        }
+      }
+    }
+
+    return false;
   }
 
   downMove() {
