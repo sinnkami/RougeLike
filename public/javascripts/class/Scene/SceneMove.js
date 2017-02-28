@@ -35,6 +35,7 @@ class SceneMove {
         enemes[i].move();
       }
       this.moveAnime(x, y);
+      GameManager.game.miniMap.isEntrance();
     }
   }
 

@@ -10,6 +10,11 @@ class GameMap {
       stairs: 9,
       enemy: -10
     }
+
+    this.option = {
+      roomWidth: [5, 10],
+      roomHeight: [5, 10]
+    }
   }
 
   init() {
@@ -28,15 +33,15 @@ class GameMap {
     new ROT.Map.Rogue(this.width, this.height, {
       cellWidth: 1+Math.ceil(Math.random()*2),
       cellHeight: 1+Math.ceil(Math.random()*2),
-      roomWidth: [5, 10],
-      roomHeight: [5, 10]
+      roomWidth: this.option.roomWidth,
+      roomHeight: this.option.roomHeight
     }).create((x, y, type) => {
       this.data[y][x] = type;
     });
 
     this.setPlayer();
     this.setStairs();
-    for (var i = 0; i < Math.ceil(Math.random() * 4); i++){
+    for (var i = 0; i < /*Math.ceil(Math.random() * 4)*/1; i++){
       GameManager.game.enemes.push(this.setEnemy());
     }
     return;

@@ -55,7 +55,16 @@ class Manager {
       }
       // デバッグ用 =begin
 
-
+      if (!this.game.miniMap.invalidation) {
+        for (var y = 0; y < this.game.miniMap.data.length; y++){
+          for (var x = 0; x < this.game.miniMap.data.length; x++){
+            if (this.game.miniMap.data[y][x] != this.game.map.number.wall){
+              this.context.fillStyle = "green";
+              this.context.fillRect(this.window.x + 20 + x*5, this.window.y + 70 + y*5, 5, 5);
+            }
+          }
+        }
+      }
       // =end
     }, 1000/this.FPS);
   }
@@ -74,8 +83,12 @@ class Manager {
     this.game.enemes = [];
     this.game.map.create();
 
+    this.game.miniMap.init();
+
     this.window.map.init();
     this.window.map.draw();
+
+    this.game.miniMap.firstMapping()
   }
 
   wait(flag, property, true_or_false, callback){

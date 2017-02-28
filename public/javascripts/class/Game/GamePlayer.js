@@ -29,6 +29,9 @@ class GamePlayer {
     var position = this.isPosition();
     map[position[1] + y][position[0] + x] = number[0];
     map[position[1]][position[0]] = number[1];
+
+    GameManager.game.miniMap.data[position[1] + y][position[0] + x] = GameManager.game.map.number.road;
+
   }
 
   moveAnime(x, y) {
