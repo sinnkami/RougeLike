@@ -21,7 +21,7 @@ class WindowMap {
         if (map.data[y][x] != number.wall){
           GameManager.context.drawImage(this.image, this.road.x*32, this.road.y*32, 32, 32, x*32, y*32, 32, 32);
         }
-        if (map.data[y][x] == number.stairs || map.data[y][x] == number.stairs + number.player) {
+        if (map.data[y][x] == number.stairs || map.data[y][x] == number.stairs + number.player || (map.data[y][x] < 0 && map.data[y][x] > -10)) {
           GameManager.context.drawImage(this.image, this.stairs.x*32, this.stairs.y*32, 32, 32, x*32, y*32, 32, 32);
         }
       }

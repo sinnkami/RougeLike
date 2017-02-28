@@ -6,6 +6,14 @@ class GameEnemy {
       y: 0
     };
 
+    this.status = {
+      exp: 0,
+      hp: 100,
+      maxhp: 100,
+      attack: 1,
+      defense: 0
+    }
+
     this.image = GameManager.game.image.enemy();
 
     var position = this.isPosition();
@@ -38,11 +46,6 @@ class GameEnemy {
       }
 
       number = GameManager.game.map.canMoveEnemy(x, y, position, this.number);
-      if (!number[0]){
-        number = [false, this.number, this.number];
-        x = 0;
-        y = 0;
-      }
       if (x < 0){
         this.direction.y = 1;
       }else if (x > 0){
@@ -51,6 +54,11 @@ class GameEnemy {
         this.direction.y = 3;
       }else if (y > 0) {
         this.direction.y = 0;
+      }
+
+      if (!number[0]){
+        x = 0;
+        y = 0;
       }
     }else if (this.direction.y == 0) { // した
       if (map[position[1]+1][position[0]] == 0 && map[position[1]][position[0]+1] == 0 && map[position[1]][position[0]-1] == 0 && map[position[1]-1][position[0]] == 0 && Math.floor(Math.random() * 3) == 0){
@@ -112,10 +120,13 @@ class GameEnemy {
 
     this.x = position[0]*32;
     this.y = position[1]*32;
-    
+
     this.moveX = x;
     this.moveY = y;
 
+    if (number[1] == undefined || number[2] == undefined){
+      return;
+    }
     map[position[1] + y][position[0] + x] = number[1];
     map[position[1]][position[0]] = number[2];
   }
@@ -187,5 +198,41 @@ class GameEnemy {
     }
 
     throw new Error("対象のエネミーがいない！？")
+  }
+
+  towardsPlayer() {
+    var Pposition = GameManager.game.player.isPosition();
+    var Eposition = this.isPosition();
+
+    var x = Pposition[0] - Eposition[0];
+    var y = Pposition[1] - Eposition[1];
+
+    if (x < 0){
+      this.direction.y = 1;
+    }else if (x > 0) {
+      this.direction.y = 2;
+    }else if (y < 0 ) {
+      this.direction.y = 3;
+    }else if (y > 0) {
+      this.direction.y = 0;
+    }
+
+    return [Math.sign(x), Math.sign(y)];
+  }
+
+  canAttack() {
+    var map = GameManager.game.map.data;
+    var position = this.isPosition();
+
+    loop: for (var y = -1; y <= 1; y++){
+      for (var x = -1; x <= 1; x++){
+        if (map[position[1] + y][position[0] + x] == GameManager.game.map.number.player || map[position[1] + y][position[0] + x] == GameManager.game.map.number.player + GameManager.game.map.number.stairs) {
+          return true;
+          break loop;
+        }
+      }
+    }
+
+    return false;
   }
 }

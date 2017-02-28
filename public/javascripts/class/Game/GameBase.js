@@ -8,13 +8,27 @@ class GameBase {
 
     this.unitOfCurrency = "G";
 
+    this.largestDamage = 255;
+
     this.player = player;
     this.enemes = [];
 
-    this.enemy = enemy;
     this.key = key;
     this.item = item;
     this.map = map;
     this.sound = sound;
+  }
+
+  enemy(number) {
+    if (!number){
+      return false;
+    }
+    for (var i = 0; i < this.enemes.length; i++){
+      if (this.enemes[i].number == number) {
+        return this.enemes[i];
+      }
+    }
+
+    return false;
   }
 }

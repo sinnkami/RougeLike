@@ -25,7 +25,6 @@ class Manager {
 
     this.scene.move.init();
     this.game.player.init();
-    this.sprite.player.init();
 
     this.init();
   }
@@ -50,6 +49,9 @@ class Manager {
       if (this.scene.stairs.hereStairs() && this.game.key.input.enter){
         this.game.key.input.enter = false;
         this.scene.stairs.down();
+      }else if (!this.scene.damage.execution.player && !this.scene.damage.execution.enemy && this.game.key.input.enter){
+        this.game.key.input.enter = false;
+        this.scene.damage.attack();
       }
       // デバッグ用 =begin
 
@@ -74,5 +76,15 @@ class Manager {
 
     this.window.map.init();
     this.window.map.draw();
+  }
+
+  wait(flag, property, true_or_false, callback){
+    var self = setInterval(() => {
+      if (flag[property] == true_or_false) {
+        clearInterval(self);
+        callback();
+        return;
+      }
+    }, 1000/this.FPS);
   }
 }

@@ -108,7 +108,7 @@ class GameMap {
     if (this.data[position[1] + y][position[0] + x] == this.number.stairs){
       return [true, this.number.stairs + this.number.player, this.number.road];
     }
-    if (this.data[position[1]][position[0]] == this.number.stairs + this.number.player && (x || y)){
+    if (this.data[position[1]][position[0]] == this.number.stairs + this.number.player && this.data[position[1] + y][position[0] + x] == this.number.road && (x || y)){
       return [true, this.number.player, this.number.stairs];
     }
     if (this.data[position[1] + y][position[0] + x] == this.number.road){
@@ -122,7 +122,7 @@ class GameMap {
     if (this.data[position[1] + y][position[0] + x] == this.number.stairs){
       return [true, this.number.stairs + number, this.number.road];
     }
-    if (this.data[position[1]][position[0]] == this.number.stairs + number && (x || y)){
+    if (this.data[position[1]][position[0]] == this.number.stairs + number && this.data[position[1] + y][position[0] + x] == this.number.road && (x || y)){
       return [true, number, this.number.stairs];
     }
     if (this.data[position[1] + y][position[0] + x] == this.number.road){

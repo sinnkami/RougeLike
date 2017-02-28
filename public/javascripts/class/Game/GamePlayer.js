@@ -3,6 +3,8 @@ class GamePlayer {
     this.x = 320;
     this.y = 256;
 
+    this.image = GameManager.game.image.player;
+
     this.direction = {
       x: 1,
       y: 0
@@ -15,6 +17,8 @@ class GamePlayer {
       untilNowExp: 0,
       hp: 100,
       maxhp: 100,
+      attack: 1,
+      defense: 0
     }
 
     this.money = 100;
@@ -23,7 +27,6 @@ class GamePlayer {
   move(x, y, number){
     var map = GameManager.game.map.data;
     var position = this.isPosition();
-    this.turnDirection();
     map[position[1] + y][position[0] + x] = number[0];
     map[position[1]][position[0]] = number[1];
   }
@@ -61,5 +64,37 @@ class GamePlayer {
         }
       }
     }
+
+    throw new Error("playerがいません！？")
+  }
+
+  inFront() {
+    var x = 0, y = 0;
+    if (this.direction.y == 0){
+      y = 1;
+    }else if (this.direction.y == 1){
+      x = -1;
+    }else if (this.direction.y == 2){
+      x = 1;
+    }else if (this.direction.y == 3){
+      y = -1;
+    }
+
+    return [x, y]
+  }
+
+  canAttack() {
+    var map = GameManager.game.map.data;
+    var position = this.isPosition();
+
+    var result = this.inFront();
+    var x = result[0];
+    var y = result[1];
+
+    if (map[position[1] + y][position[0] + x] < 0){
+      return map[position[1] + y][position[0] + x];
+    }
+
+    return false;
   }
 }
