@@ -223,14 +223,21 @@ class GameEnemy {
   canAttack() {
     var map = GameManager.game.map.data;
     var position = this.isPosition();
-
-    loop: for (var y = -1; y <= 1; y++){
-      for (var x = -1; x <= 1; x++){
-        if (map[position[1] + y][position[0] + x] == GameManager.game.map.number.player || map[position[1] + y][position[0] + x] == GameManager.game.map.number.player + GameManager.game.map.number.stairs) {
-          return true;
-          break loop;
-        }
-      }
+    if (map[position[1] - 1][position[0]] == GameManager.game.map.number.player
+     || map[position[1] - 1][position[0]] == GameManager.game.map.number.player + GameManager.game.map.number.stairs) {
+       return true;
+    }
+    if (map[position[1]][position[0] + 1] == GameManager.game.map.number.player
+     || map[position[1]][position[0] + 1] == GameManager.game.map.number.player + GameManager.game.map.number.stairs) {
+       return true;
+    }
+    if (map[position[1]][position[0] - 1] == GameManager.game.map.number.player
+     || map[position[1]][position[0] - 1] == GameManager.game.map.number.player + GameManager.game.map.number.stairs) {
+       return true;
+    }
+    if (map[position[1] + 1][position[0]] == GameManager.game.map.number.player
+     || map[position[1] + 1][position[0]] == GameManager.game.map.number.player + GameManager.game.map.number.stairs) {
+       return true;
     }
 
     return false;

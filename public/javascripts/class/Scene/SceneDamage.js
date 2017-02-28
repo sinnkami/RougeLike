@@ -96,7 +96,7 @@ class SceneDamage {
       }
 
       count++;
-      if (count == 64){ GameManager.scene.damage.execution.enemy = false; clearInterval(self); }
+      if (count == 32){ GameManager.scene.damage.execution.enemy = false; clearInterval(self); }
     }, GameManager.scene.damage.speed);
   }
 
