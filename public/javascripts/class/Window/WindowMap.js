@@ -32,4 +32,33 @@ class WindowMap {
     GameManager.window.translate(x, y);
     GameManager.context.translate(x, y);
   }
+
+  shift() {
+    var map = GameManager.game.map;
+    for (var y = 0; y < map.data.length; y++){
+      for (var x = 0; x < map.data[y].length; x++){
+        if (map.data[y][x] != map.number.wall){
+          GameManager.context.strokeStyle = "white";
+          GameManager.context.strokeRect(x*32, y*32, 32, 32);
+        }
+      }
+    }
+
+    var player = GameManager.game.player;
+    var position = player.isPosition();
+    var direction = player.inFront();
+
+    var x = direction[0];
+    var y = direction[1];
+    while (true) {
+      position[0] += x;
+      position[1] += y;
+
+      if (map.data[position[1]][position[0]] == map.number.wall){ break; }
+
+      GameManager.context.strokeStyle = "red";
+      GameManager.context.strokeRect(position[0]*32, position[1]*32, 32, 32);
+    }
+
+  }
 }

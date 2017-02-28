@@ -6,9 +6,16 @@ class SceneMove {
   }
 
   event() {
+
     var x = 0, y = 0;
     var enemes = GameManager.game.enemes;
     var player = GameManager.game.player;
+
+    if (this.key.shift){
+      player.turnDirection();
+      GameManager.window.map.shift();
+      return;
+    }
 
     if (this.key.up) { x += 0; y += -1; }
     if (this.key.down) { x += 0; y += 1; }
@@ -39,7 +46,7 @@ class SceneMove {
     var count = 0;
     var self = setInterval(() => {
       if (x || y){
-        GameManager.window.map.move(-x, -y);        
+        GameManager.window.map.move(-x, -y);
       }
       for (var i = 0; i < GameManager.game.enemes.length; i++){
         GameManager.game.enemes[i].x += GameManager.game.enemes[i].moveX;

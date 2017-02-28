@@ -6,7 +6,8 @@ class GameKey {
       right: false,
        left: false,
       enter: false,
-       back: false
+       back: false,
+      shift: false,
     }
   }
 
@@ -48,6 +49,11 @@ class GameKey {
           break;
         case 88: // X
           this.input.back = true;
+          break;
+
+        // shift
+        case 16: // shift
+          this.input.shift = true;
           break;
       }
     })
@@ -91,6 +97,11 @@ class GameKey {
           break;
         case 88: // X
           this.input.back = false;
+          break;
+
+        // shift
+        case 16: // shift
+          this.input.shift = false;
           break;
       }
     })
