@@ -37,8 +37,6 @@ class Manager {
   startInterval() {
     this.mainInterval = setInterval(() => {
       this.window.map.draw();
-      this.window.statusBar.draw();
-      this.window.miniMap.draw();
 
       this.game.key.event();
       this.scene.move.event();
@@ -58,6 +56,8 @@ class Manager {
 
       this.window.logs.init();
       this.window.logs.latestDraw();
+      this.window.statusBar.draw();
+      this.window.miniMap.draw();
       // デバッグ用 =begin
 
 

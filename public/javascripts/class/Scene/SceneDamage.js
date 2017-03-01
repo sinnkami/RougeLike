@@ -100,7 +100,6 @@ class SceneDamage {
         enemy.x -= x;
         enemy.y -= y;
       }
-      console.log(x, y);
       count++;
       if (count == 32){ GameManager.scene.damage.execution.enemy = false; clearInterval(self); }
     }, GameManager.scene.damage.speed);
