@@ -1,8 +1,8 @@
 class WindowBase {
-  constructor(item, map, log, header, menu, quit, status, stairs) {
+  constructor(item, map, logs, header, menu, quit, status, stairs) {
     this.item = item;
     this.map = map;
-    this.log = log;
+    this.logs = logs;
     this.statusBar = header;
     this.menu = menu;
     this.quit = quit;

@@ -46,6 +46,7 @@ class Manager {
       for (var i = 0; i < this.game.enemes.length; i++){
         this.sprite.enemy.draw(this.game.enemes[i]);
       }
+
       if (this.scene.stairs.hereStairs() && this.game.key.input.enter){
         this.game.key.input.enter = false;
         this.scene.stairs.down();
@@ -53,6 +54,9 @@ class Manager {
         this.game.key.input.enter = false;
         this.scene.damage.attack();
       }
+
+      this.window.logs.init();
+      this.window.logs.latestDraw();
       // デバッグ用 =begin
 
       if (!this.game.miniMap.invalidation) {

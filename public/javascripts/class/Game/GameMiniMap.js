@@ -150,6 +150,7 @@ class GameMiniMap {
       }
     }
 
+    GameManager.game.logs.push("特殊な磁場でマップが表示されなくなってしまった");
     this.invalidation = true;
     return
   }

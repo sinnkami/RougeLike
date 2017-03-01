@@ -7,6 +7,7 @@ class GameEnemy {
     };
 
     this.status = {
+      name: "エネミー１",
       exp: 0,
       hp: 100,
       maxhp: 100,

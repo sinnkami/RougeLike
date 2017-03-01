@@ -11,6 +11,7 @@ class GamePlayer {
     };
 
     this.status = {
+      name: "プレイヤー",
       level: 1,
       nextLevel: 10,
       exp: 0,

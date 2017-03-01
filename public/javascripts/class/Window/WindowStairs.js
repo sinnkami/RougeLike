@@ -9,7 +9,7 @@ class WindowStairs {
 
   init() {
     this.x = GameManager.window.x;
-    this.y = GameManager.window.y + 330;
+    this.y = GameManager.window.y + 380;
     this.width = GameManager.canvas.width;
     this.height = 100;
 

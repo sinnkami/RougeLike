@@ -110,6 +110,12 @@ class SceneDamage {
       damage = 0;
     }
 
+    if (damage == 0){
+      GameManager.game.logs.push(`${attacker.status.name}は攻撃を外した`);
+    }else {
+      GameManager.game.logs.push(`${attacker.status.name}は${defender.status.name}に${damage}ダメージを与えた`)
+    }
+
     return damage;
   }
 }
