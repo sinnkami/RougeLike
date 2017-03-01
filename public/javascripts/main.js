@@ -11,7 +11,7 @@ $(function () {
   _Game = new GameBase(new GameImage(), new GamePlayer(), new GameEnemy(), new GameKey(), new GameItem(), new GameMap(), new GameSound(), new GameMiniMap(), new GameLogs());
   _Scene = new SceneBase(new SceneDamage(), new SceneItem(), new SceneMenu(), new SceneMove(), new SceneStairs());
   _Sprite = new SpriteBase(new SpriteEnemy(), new SpriteItems(), new SpritePlayer());
-  _Window = new WindowBase(new WindowItem(), new WindowMap(), new WindowLogs(), new WindowStatusBar(), new WindowMenu(), new WindowQuit(), new WindowStatus(), new WindowStairs());
+  _Window = new WindowBase(new WindowItem(), new WindowMap(), new WindowLogs(), new WindowStatusBar(), new WindowMenu(), new WindowQuit(), new WindowStatus(), new WindowStairs(), new WindowMiniMap());
 
   GameManager = new Manager(_canvas, _context, _Game, _Scene, _Sprite, _Window, $(window));
 

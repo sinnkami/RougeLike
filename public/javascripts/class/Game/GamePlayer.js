@@ -25,6 +25,14 @@ class GamePlayer {
     this.money = 100;
   }
 
+  dead() {
+    if (this.status.hp <= 0){
+      return true;
+    }else {
+      return false;
+    }
+  }
+
   move(x, y, number){
     var map = GameManager.game.map.data;
     var position = this.isPosition();

@@ -38,6 +38,7 @@ class Manager {
     this.mainInterval = setInterval(() => {
       this.window.map.draw();
       this.window.statusBar.draw();
+      this.window.miniMap.draw();
 
       this.game.key.event();
       this.scene.move.event();
@@ -59,16 +60,7 @@ class Manager {
       this.window.logs.latestDraw();
       // デバッグ用 =begin
 
-      if (!this.game.miniMap.invalidation) {
-        for (var y = 0; y < this.game.miniMap.data.length; y++){
-          for (var x = 0; x < this.game.miniMap.data.length; x++){
-            if (this.game.miniMap.data[y][x] != this.game.map.number.wall){
-              this.context.fillStyle = "green";
-              this.context.fillRect(this.window.x + 20 + x*5, this.window.y + 70 + y*5, 5, 5);
-            }
-          }
-        }
-      }
+
       // =end
     }, 1000/this.FPS);
   }

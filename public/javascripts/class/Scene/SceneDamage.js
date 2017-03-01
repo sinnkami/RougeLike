@@ -26,6 +26,9 @@ class SceneDamage {
     if (enemy) {
       var damage = this.damage(player, enemy);
       enemy.status.hp -= damage;
+      if (enemy.dead()){
+        GameManager.game.logs.push(`${enemy.status.name}を倒した`);
+      }
     }
 
     var result = player.inFront();
@@ -74,6 +77,9 @@ class SceneDamage {
       var x = result[0];
       var y = result[1];
 
+      attacker[i].moveX = 0;
+      attacker[i].moveY = 0;
+
       GameManager.scene.damage.enemyAnime(x, y, attacker[i]);
     }
 
@@ -94,7 +100,7 @@ class SceneDamage {
         enemy.x -= x;
         enemy.y -= y;
       }
-
+      console.log(x, y);
       count++;
       if (count == 32){ GameManager.scene.damage.execution.enemy = false; clearInterval(self); }
     }, GameManager.scene.damage.speed);

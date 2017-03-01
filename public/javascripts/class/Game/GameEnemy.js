@@ -9,7 +9,7 @@ class GameEnemy {
     this.status = {
       name: "エネミー１",
       exp: 0,
-      hp: 100,
+      hp: 10,
       maxhp: 100,
       attack: 1,
       defense: 0
@@ -26,6 +26,23 @@ class GameEnemy {
 
     this.search = 3;
   }
+
+  dead() {
+    if (this.status.hp <= 0){
+      var position = this.isPosition();
+      GameManager.game.map.data[position[1]][position[0]] = GameManager.game.map.number.road;
+      for (var i = 0; i < GameManager.game.enemes.length; i++){
+        if (GameManager.game.enemes[i].number == this.number){
+          GameManager.game.enemes.splice(i, 1);
+          break;
+        }
+      }
+      return true;
+    }else {
+      return false;
+    }
+  }
+
 
   move(){
     var map = GameManager.game.map.data;
