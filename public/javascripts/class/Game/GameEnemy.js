@@ -52,18 +52,64 @@ class GameEnemy {
 
     var result = this.playerNearby(map, position);
     if (result) {
-      x = Math.sign(result[0]);
-      y = Math.sign(result[1]);
+      x = result[0];
+      y = result[1];
+
+      if (Math.abs(x) <= Math.abs(y)) {
+        x = 0;
+        y = Math.sign(y);
+      }else {
+        x = Math.sign(x);
+        y = 0;
+      }
 
       number = GameManager.game.map.canMoveEnemy(x, y, position, this.number);
-      if (x < 0){ this.direction.y = 1; }
-      if (x > 0){ this.direction.y = 2; }
-      if (y < 0){ this.direction.y = 3; }
-      if (y > 0){ this.direction.y = 0; }
+      if (x < 0){
+        this.direction.y = 1;
+      }else if (x > 0){
+        this.direction.y = 2;
+      }else if (y < 0) {
+        this.direction.y = 3;
+      }else if (y > 0) {
+        this.direction.y = 0;
+      }
 
       if (!number[0]){
-        x = 0;
-        y = 0;
+        if (x){
+          x = 0;
+          y = Math.sign(result[1]);
+          number = GameManager.game.map.canMoveEnemy(x, y, position, this.number);
+          if (x < 0){
+            this.direction.y = 1;
+          }else if (x > 0){
+            this.direction.y = 2;
+          }else if (y < 0) {
+            this.direction.y = 3;
+          }else if (y > 0) {
+            this.direction.y = 0;
+          }
+          if (!number[0]){
+            x = 0;
+            y = 0;
+          }
+        }else {
+          x = Math.sign(result[0]);
+          y = 0;
+          number = GameManager.game.map.canMoveEnemy(x, y, position, this.number);
+          if (x < 0){
+            this.direction.y = 1;
+          }else if (x > 0){
+            this.direction.y = 2;
+          }else if (y < 0) {
+            this.direction.y = 3;
+          }else if (y > 0) {
+            this.direction.y = 0;
+          }
+          if (!number[0]){
+            x = 0;
+            y = 0;
+          }
+        }
       }
     }else if (this.direction.y == 0) { // した
       if (map[position[1]+1][position[0]] == 0 && map[position[1]][position[0]+1] == 0 && map[position[1]][position[0]-1] == 0 && map[position[1]-1][position[0]] == 0 && Math.floor(Math.random() * 3) == 0){
