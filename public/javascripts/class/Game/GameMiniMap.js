@@ -28,59 +28,55 @@ class GameMiniMap {
       }
     }
 
-    if (wall == 2){
-      var direction = player.inFront();
-      for (var y = -1; y <= 1; y++){
-        for (var x = -1; x <= 1; x++){
-          if (this.map[position[1] + direction[1] + y][position[0] + direction[0] + x] == GameManager.game.map.number.wall){
-            console.log("部屋の出口");
-            return
-          }
+    var direction = player.inFront();
+    for (var y = -1; y <= 1; y++){
+      for (var x = -1; x <= 1; x++){
+        if (this.map[position[1] + direction[1] + y][position[0] + direction[0] + x] == GameManager.game.map.number.wall){
+          return
         }
       }
+    }
 
-      if (direction[0]){
-        for (var y = position[1]; y >= 0; y--){
-          if (this.map[y][position[0]] == GameManager.game.map.number.wall){
-            y += 1;
-            this.y = y;
-            break;
-          }
+    if (direction[0]){
+      for (var y = position[1]; y >= 0; y--){
+        if (this.map[y][position[0]] == GameManager.game.map.number.wall){
+          y += 1;
+          this.y = y;
+          break;
         }
-        if (direction[0] < 0){
-          for (var x = position[0]; x >= 0; x--){
-            if (this.map[y][x] == GameManager.game.map.number.wall){
-              x += 1;
-              this.x = x;
-              break;
-            }
-          }
-        }else {
-          this.x = position[0];
-        }
-      }else {
+      }
+      if (direction[0] < 0){
         for (var x = position[0]; x >= 0; x--){
-          if (this.map[position[1]][x] == GameManager.game.map.number.wall){
+          if (this.map[y][x] == GameManager.game.map.number.wall){
             x += 1;
             this.x = x;
             break;
           }
         }
-        if (direction[1] < 0){
-          for (var y = position[1]; y >= 0; y--){
-            if (this.map[y][x] == GameManager.game.map.number.wall){
-              y += 1;
-              this.y = y;
-              break;
-            }
-          }
-        }else {
-          this.y = position[1];
+      }else {
+        this.x = position[0];
+      }
+    }else {
+      for (var x = position[0]; x >= 0; x--){
+        if (this.map[position[1]][x] == GameManager.game.map.number.wall){
+          x += 1;
+          this.x = x;
+          break;
         }
       }
-      this.mapping();
-      console.log("部屋の入り口");
+      if (direction[1] < 0){
+        for (var y = position[1]; y >= 0; y--){
+          if (this.map[y][x] == GameManager.game.map.number.wall){
+            y += 1;
+            this.y = y;
+            break;
+          }
+        }
+      }else {
+        this.y = position[1];
+      }
     }
+    this.mapping();
   }
 
   mapping() {
