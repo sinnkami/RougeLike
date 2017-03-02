@@ -8,8 +8,8 @@ class WindowLogs {
   }
 
   init() {
-    this.x = GameManager.window.x;
-    this.y = GameManager.window.y + 380;
+    this.x = 0;
+    this.y = 380;
     this.width = GameManager.canvas.width;
     this.height = 100;
 
@@ -17,19 +17,19 @@ class WindowLogs {
   }
 
   latestDraw() {
-    var context = GameManager.context;
+    var canui = GameManager.canui;
     var logs = GameManager.game.logs.latest;
 
     // フレーム
-    context.drawImage(this.image, this.x, this.y, this.width, this.height);
+    canui.drawImage(this.image, this.x, this.y, this.width, this.height);
 
     // logの表示
-    context.fillStyle = "white";
-    context.font = "24px normal";
-    context.textAlign = "start";
+    canui.fillStyle = "white";
+    canui.font = "24px normal";
+    canui.textAlign = "start";
     var y = 30;
     for (var i = 0; i < logs.length; i++){
-      context.fillText(logs[i], this.x+30, this.y+y+y*i, this.width-50);
+      canui.fillText(logs[i], this.x+30, this.y+y+y*i, this.width-50);
     }
   }
 }

@@ -8,8 +8,8 @@ class WindowStairs {
   }
 
   init() {
-    this.x = GameManager.window.x;
-    this.y = GameManager.window.y + 380;
+    this.x = 0;
+    this.y = 380;
     this.width = GameManager.canvas.width;
     this.height = 100;
 
@@ -17,28 +17,28 @@ class WindowStairs {
   }
 
   draw() {
-    var context = GameManager.context;
+    var canui = GameManager.canui;
 
     // フレーム
-    context.drawImage(this.image, this.x, this.y, this.width, this.height);
+    canui.drawImage(this.image, this.x, this.y, this.width, this.height);
 
     if (this.position == 0){
-      context.fillStyle = "grey"
-      context.fillRect(this.x + 505, this.y+25, 50, 20);
+      canui.fillStyle = "grey"
+      canui.fillRect(this.x + 505, this.y+25, 50, 20);
     }else if (this.position == 1) {
-      context.fillStyle = "grey"
-      context.fillRect(this.x + 500, this.y+55, 60, 20);
+      canui.fillStyle = "grey"
+      canui.fillRect(this.x + 500, this.y+55, 60, 20);
     }
 
     // 階段のテキスト
-    context.fillStyle = "white"
-    context.font = "40px normal";
-    context.fillText("階段を登りますか？", this.x+20, this.y+60);
+    canui.fillStyle = "white"
+    canui.font = "40px normal";
+    canui.fillText("階段を登りますか？", this.x+20, this.y+60);
 
-    context.font = "20px normal";
-    context.textAlign = "center";
-    context.fillText("はい", this.x + 530, this.y+40);
-    context.fillText("いいえ", this.x + 530, this.y+70);
-    context.textAlign = "start";
+    canui.font = "20px normal";
+    canui.textAlign = "center";
+    canui.fillText("はい", this.x + 530, this.y+40);
+    canui.fillText("いいえ", this.x + 530, this.y+70);
+    canui.textAlign = "start";
   }
 }

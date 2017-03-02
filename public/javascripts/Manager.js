@@ -1,8 +1,10 @@
 class Manager {
-  constructor(canvas, context, game, scene, sprite, window, $window) {
+  constructor(canvas, canmain, cananimation, canui, game, scene, sprite, window, $window) {
     this.game = game;
     this.canvas = canvas;
-    this.context = context;
+    this.canmain = canmain;
+    this.cananimation = cananimation;
+    this.canui = canui;
     this.scene = scene;
     this.sprite = sprite;
     this.window = window;
@@ -36,7 +38,26 @@ class Manager {
 
   startInterval() {
     this.mainInterval = setInterval(() => {
+      this.window.uiClear();
       this.window.map.draw();
+      this.window.logs.init();
+      this.window.logs.latestDraw();
+      this.window.statusBar.draw();
+      this.window.miniMap.draw();
+
+      // デバッグ用 =begin
+      if (GameManager.game.player.road){
+        this.cananimation.clearRect(0, 0, this.canvas.width, this.canvas.height);
+        this.cananimation.globalAlpha = 0.7;
+        this.cananimation.fillRect(0, 0, this.canvas.width, this.canvas.height);
+        this.cananimation.globalCompositeOperation = "destination-out";
+        this.cananimation.arc(this.game.player.x+15, this.game.player.y+15, 50, 0, 180, false);
+        this.cananimation.fill();
+        this.cananimation.globalCompositeOperation = "source-over";
+      }else {
+        this.cananimation.clearRect(0, 0, this.canvas.width, this.canvas.height);        
+      }
+      // =end
 
       this.game.key.event();
       this.scene.move.event();
@@ -54,14 +75,6 @@ class Manager {
         this.scene.damage.attack();
       }
 
-      this.window.logs.init();
-      this.window.logs.latestDraw();
-      this.window.statusBar.draw();
-      this.window.miniMap.draw();
-      // デバッグ用 =begin
-
-
-      // =end
     }, 1000/this.FPS);
   }
 
@@ -70,7 +83,7 @@ class Manager {
   }
 
   mapCreate() {
-    this.context.setTransform(1,0,0,1,0,0);
+    this.canmain.setTransform(1,0,0,1,0,0);
     this.window.x = 0;
     this.window.y = 0;
 
@@ -80,6 +93,10 @@ class Manager {
     this.game.map.create();
 
     this.game.miniMap.init();
+    this.game.logs.latest = [];
+
+    this.game.logs.nonePush(`------------------------------------------------------`)
+    this.game.logs.nonePush(`${this.game.hierarchy}階に到達した`)
 
     this.window.map.init();
     this.window.map.draw();

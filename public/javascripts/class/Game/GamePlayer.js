@@ -22,6 +22,8 @@ class GamePlayer {
       defense: 0
     }
 
+    this.road = false;
+
     this.money = 100;
   }
 

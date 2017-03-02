@@ -15,14 +15,14 @@ class WindowMap {
   draw() {
     var map = GameManager.game.map;
     var number = GameManager.game.map.number;
-    GameManager.context.clearRect(GameManager.window.x, GameManager.window.y, GameManager.canvas.width, GameManager.canvas.height);
+    GameManager.canmain.clearRect(GameManager.window.x, GameManager.window.y, GameManager.canvas.width, GameManager.canvas.height);
     for (var y = 0; y < map.data.length; y++){
       for (var x = 0; x < map.data[y].length; x++){
         if (map.data[y][x] != number.wall){
-          GameManager.context.drawImage(this.image, this.road.x*32, this.road.y*32, 32, 32, x*32, y*32, 32, 32);
+          GameManager.canmain.drawImage(this.image, this.road.x*32, this.road.y*32, 32, 32, x*32, y*32, 32, 32);
         }
         if (map.data[y][x] == number.stairs || map.data[y][x] == number.stairs + number.player || (map.data[y][x] < 0 && map.data[y][x] > -10)) {
-          GameManager.context.drawImage(this.image, this.stairs.x*32, this.stairs.y*32, 32, 32, x*32, y*32, 32, 32);
+          GameManager.canmain.drawImage(this.image, this.stairs.x*32, this.stairs.y*32, 32, 32, x*32, y*32, 32, 32);
         }
       }
     }
@@ -30,7 +30,7 @@ class WindowMap {
 
   move(x, y) {
     GameManager.window.translate(x, y);
-    GameManager.context.translate(x, y);
+    GameManager.canmain.translate(x, y);
   }
 
   shift() {
@@ -38,8 +38,8 @@ class WindowMap {
     for (var y = 0; y < map.data.length; y++){
       for (var x = 0; x < map.data[y].length; x++){
         if (map.data[y][x] != map.number.wall){
-          GameManager.context.strokeStyle = "white";
-          GameManager.context.strokeRect(x*32, y*32, 32, 32);
+          GameManager.canmain.strokeStyle = "white";
+          GameManager.canmain.strokeRect(x*32, y*32, 32, 32);
         }
       }
     }
@@ -56,8 +56,8 @@ class WindowMap {
 
       if (map.data[position[1]][position[0]] == map.number.wall){ break; }
 
-      GameManager.context.strokeStyle = "red";
-      GameManager.context.strokeRect(position[0]*32, position[1]*32, 32, 32);
+      GameManager.canmain.strokeStyle = "red";
+      GameManager.canmain.strokeRect(position[0]*32, position[1]*32, 32, 32);
     }
 
   }

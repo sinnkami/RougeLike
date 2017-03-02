@@ -1,17 +1,26 @@
 @font-face {
   font-family: 'umefont';
-  src: url('/umefont/ume-tmo3.ttf');
+  src: url("/umefont/ume-tmo3.ttf");
 }
 
 body {
   padding: 50px;
 }
 
-a {
-  color: #00B7FF;
-}
-
 canvas {
   font-family: umefont;
+  position: absolute;
+}
+
+#main {
   background-color: black;
+  z-index: 1;
+}
+
+#animation {
+  z-index: 2;
+}
+
+#ui {
+  z-index: 3;
 }

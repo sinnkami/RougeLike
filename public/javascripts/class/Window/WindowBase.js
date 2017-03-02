@@ -18,4 +18,8 @@ class WindowBase {
     this.x -= x;
     this.y -= y;
   }
+
+  uiClear() {
+    GameManager.canui.clearRect(0, 0, GameManager.canvas.width, GameManager.canvas.height);
+  }
 }

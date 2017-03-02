@@ -5,9 +5,16 @@
 body {
   padding: 50px; }
 
-a {
-  color: #00B7FF; }
-
 canvas {
   font-family: umefont;
-  background-color: black; }
+  position: absolute; }
+
+#main {
+  background-color: black;
+  z-index: 1; }
+
+#animation {
+  z-index: 2; }
+
+#ui {
+  z-index: 3; }
