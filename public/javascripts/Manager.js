@@ -46,7 +46,7 @@ class Manager {
       this.window.miniMap.draw();
 
       // デバッグ用 =begin
-      if (GameManager.game.player.road){
+      if (GameManager.game.player.street){
         this.cananimation.clearRect(0, 0, this.canvas.width, this.canvas.height);
         this.cananimation.globalAlpha = 0.7;
         this.cananimation.fillRect(0, 0, this.canvas.width, this.canvas.height);
@@ -55,7 +55,7 @@ class Manager {
         this.cananimation.fill();
         this.cananimation.globalCompositeOperation = "source-over";
       }else {
-        this.cananimation.clearRect(0, 0, this.canvas.width, this.canvas.height);        
+        this.cananimation.clearRect(0, 0, this.canvas.width, this.canvas.height);
       }
       // =end
 

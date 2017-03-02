@@ -30,14 +30,6 @@ class GameMiniMap {
 
     if (wall == 2){
       var direction = player.inFront();
-      for (var y = -1; y <= 1; y++){
-        for (var x = -1; x <= 1; x++){
-          if (this.map[position[1] + direction[1] + y][position[0] + direction[0] + x] == GameManager.game.map.number.wall){
-            player.road = true;
-            return
-          }
-        }
-      }
 
       if (direction[0]){
         for (var y = position[1]; y >= 0; y--){
@@ -79,7 +71,6 @@ class GameMiniMap {
         }
       }
       this.mapping();
-      player.road = false;
     }
   }
 

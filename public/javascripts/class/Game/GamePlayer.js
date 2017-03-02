@@ -22,7 +22,7 @@ class GamePlayer {
       defense: 0
     }
 
-    this.road = false;
+    this.street = false;
 
     this.money = 100;
   }
@@ -38,11 +38,26 @@ class GamePlayer {
   move(x, y, number){
     var map = GameManager.game.map.data;
     var position = this.isPosition();
+    this.isStreet(position[0], position[1], map);
     map[position[1] + y][position[0] + x] = number[0];
     map[position[1]][position[0]] = number[1];
-
     GameManager.game.miniMap.data[position[1] + y][position[0] + x] = GameManager.game.map.number.road;
 
+  }
+
+  isStreet(px, py, map) {
+    var number = GameManager.game.map.number;
+    var front = this.inFront();
+    if ((front[0] && map[py-1][px+front[0]] == number.wall && map[py][px+front[0]] == number.road && map[py+1][px+front[0]] == number.wall)
+     || (front[1] && map[py+front[1]][px-1] == number.wall && map[py+front[1]][px] == number.road && map[py+front[1]][px+1] == number.wall)
+    ){
+      this.street = true;
+    }
+    if ((front[0] && map[py-1][px+front[0]] == number.road && map[py][px+front[0]] == number.road && map[py+1][px+front[0]] == number.road)
+     || (front[1] && map[py+front[1]][px-1] == number.road && map[py+front[1]][px] == number.road && map[py+front[1]][px+1] == number.road)
+    ){
+      this.street = false;
+    }
   }
 
   moveAnime(x, y) {
