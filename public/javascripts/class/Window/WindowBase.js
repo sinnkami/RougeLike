@@ -1,5 +1,5 @@
 class WindowBase {
-  constructor(item, map, logs, header, menu, quit, status, stairs, miniMap) {
+  constructor(item, map, logs, header, menu, quit, status, stairs, miniMap, street) {
     this.item = item;
     this.map = map;
     this.logs = logs;
@@ -9,6 +9,7 @@ class WindowBase {
     this.status = status;
     this.stairs = stairs;
     this.miniMap = miniMap;
+    this.street = street;
 
     this.x = 0;
     this.y = 0;

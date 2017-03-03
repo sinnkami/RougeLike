@@ -48,15 +48,18 @@ class GamePlayer {
   isStreet(px, py, map) {
     var number = GameManager.game.map.number;
     var front = this.inFront();
+
     if ((front[0] && map[py-1][px+front[0]] == number.wall && map[py][px+front[0]] == number.road && map[py+1][px+front[0]] == number.wall)
      || (front[1] && map[py+front[1]][px-1] == number.wall && map[py+front[1]][px] == number.road && map[py+front[1]][px+1] == number.wall)
     ){
       this.street = true;
+      GameManager.window.street.draw();
     }
     if ((front[0] && map[py-1][px+front[0]] == number.road && map[py][px+front[0]] == number.road && map[py+1][px+front[0]] == number.road)
      || (front[1] && map[py+front[1]][px-1] == number.road && map[py+front[1]][px] == number.road && map[py+front[1]][px+1] == number.road)
     ){
       this.street = false;
+      GameManager.window.street.clear();
     }
   }
 

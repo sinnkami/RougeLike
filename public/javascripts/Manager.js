@@ -28,6 +28,8 @@ class Manager {
     this.scene.move.init();
     this.game.player.init();
 
+    this.window.street.init();
+
     this.init();
   }
 
@@ -46,17 +48,6 @@ class Manager {
       this.window.miniMap.draw();
 
       // デバッグ用 =begin
-      if (GameManager.game.player.street){
-        this.cananimation.clearRect(0, 0, this.canvas.width, this.canvas.height);
-        this.cananimation.globalAlpha = 0.7;
-        this.cananimation.fillRect(0, 0, this.canvas.width, this.canvas.height);
-        this.cananimation.globalCompositeOperation = "destination-out";
-        this.cananimation.arc(this.game.player.x+15, this.game.player.y+15, 50, 0, 180, false);
-        this.cananimation.fill();
-        this.cananimation.globalCompositeOperation = "source-over";
-      }else {
-        this.cananimation.clearRect(0, 0, this.canvas.width, this.canvas.height);
-      }
       // =end
 
       this.game.key.event();
