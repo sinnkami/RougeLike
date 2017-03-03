@@ -11,6 +11,11 @@ class GameImage {
 
     this.enemes = [new Image()];
     this.enemes[0].src = "/images/charcter/enemy1.png";
+
+    this.item = [];
+    for (var i = 0; i < 1; i++){
+      this.item.push(new Image());
+    }
   }
 
   enemy() {

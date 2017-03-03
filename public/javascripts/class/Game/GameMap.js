@@ -28,6 +28,8 @@ class GameMap {
         this.data[y][x] = null;
       }
     }
+
+    this.items = [];
   }
 
   create() {
@@ -47,6 +49,7 @@ class GameMap {
     for (var i = 0; i < Math.ceil(Math.random() * 4); i++){
       GameManager.game.enemes.push(this.setEnemy());
     }
+    this.setItem();
     return;
   }
 
@@ -110,6 +113,24 @@ class GameMap {
     }
 
     return this.setStairs();
+  }
+
+  setItem() {
+    loop: for (var y = 1; y < this.data.length; y++){
+      for (var x = 1; x < this.data.length; x++){
+        if ( // 周囲のマスが道の時の判定 + 乱数
+          this.data[y-1][x-1] == this.number.road && this.data[y-1][x] == this.number.road && this.data[y-1][x+1] == this.number.road &&
+          this.data[y][x-1] == this.number.road && this.data[y][x] == this.number.road && this.data[y][x+1] == this.number.road &&
+          this.data[y+1][x-1] == this.number.road && this.data[y+1][x] == this.number.road && this.data[y+1][x+1] == this.number.road &&
+          Math.floor(Math.random() * 50) == 0
+        ) {
+          var item = GameManager.game.item.set(x, y);
+          this.items.push(item);
+        }
+      }
+    }
+
+    console.log(this.items);
   }
 
   canMove(x, y, position){

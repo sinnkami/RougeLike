@@ -22,6 +22,8 @@ class GamePlayer {
       defense: 0
     }
 
+    this.personalEffects = [];
+
     this.street = false;
 
     this.money = 100;
