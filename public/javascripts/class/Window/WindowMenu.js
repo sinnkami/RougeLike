@@ -15,7 +15,11 @@ class WindowMenu {
   }
 
   mapClear() {
-    GameManager.canui.clearRect(this.x + 150, this.y + 20, GameManager.game.map.width*10, GameManager.game.map.height*10);
+    GameManager.canui.clearRect(this.x + 130, this.y, GameManager.game.map.width*10 + 20, GameManager.game.map.height*10 + 20);
+  }
+
+  itemClear() {
+    GameManager.canui.clearRect(this.x + 150, this.y + 20, 300, 400);
   }
 
   draw() {
@@ -68,5 +72,46 @@ class WindowMenu {
         }
       }
     }
+  }
+
+  itemDraw() {
+    var context = GameManager.canui;
+    var items = GameManager.game.player.personalEffects;
+
+    var x = this.x + 150;
+    var y = this.y + 20;
+
+    // フレーム
+    context.fillStyle = "orange";
+    context.fillRect(x, y, 300, 235);
+    context.fillStyle = "yellow";
+    context.fillRect(x, y+235, 300, 70);
+
+    // アイテムの画像と名前
+    context.font = "17px normal";
+    context.textAlign = "start";
+    if (items.length != 0){
+
+      context.fillStyle = "grey";
+      context.fillRect(x+(20*this.position.x) + 20, y+(22*this.position.y)+8, 120, 17);
+
+      for (var i = 0; i < items.length; i += 2){
+        context.fillStyle = "red";
+        context.fillRect(x + 3, y+(22*(i/2))+8, 17, 17);
+        context.fillStyle = "white";
+        context.fillText(items[i].name, x + 20, y+(i/2+1)*22, 120);
+        if (items[i+1]){
+          context.fillStyle = "red";
+          context.fillRect(x + 153, y+(22*(i/2))+8, 17, 17);
+          context.fillStyle = "white";
+          context.fillText(items[i+1].name, x + 170, y+(i/2+1)*22, 120);
+        }
+      }
+    }else {
+      context.font = "20px normal";
+      context.fillStyle = "white";
+      context.fillText("何も持っていない", x + 20, y + 22);
+    }
+
   }
 }

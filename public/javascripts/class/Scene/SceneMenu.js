@@ -2,24 +2,28 @@ class SceneMenu {
   init() {
     this.menu = {
       start:true,
-      items: [false, {
-
-      }],
-      map: [false],
-      search: [false],
-      gameEnd: [false],
+      item: {
+        main: false,
+      },
+      map: false,
+      search: false,
+      gameEnd: false,
     }
 
     this.interval = [];
   }
 
-  clear(stopEvent) {
+  clear(stopEvent, stopEventSub) {
     var len = this.interval.length-1;
 
     clearInterval(this.interval[len]);
     this.interval.pop();
-    if (stopEvent == "items"){
+    if (stopEvent == "item"){
+      if (stopEventSub){
 
+      }else {
+        this.menu[stopEvent]["main"] = false;
+      }
     }else if (stopEvent == "start"){
       GameManager.startInterval();
     }else {
@@ -66,7 +70,11 @@ class SceneMenu {
 
     if (key.input.enter){
       key.input.enter = false;
-      if (menu.position.x == 1 && menu.position.y == 0){
+      if (menu.position.x == 0 && menu.position.y == 0) {
+        this.menu.start = false;
+        this.menu.item.main = true;
+        this.itemInterval();
+      }else if (menu.position.x == 1 && menu.position.y == 0){
         this.menu.start = false;
         this.menu.map = true;
         this.mapInterval();
@@ -87,6 +95,19 @@ class SceneMenu {
     }, 1000/GameManager.FPS-10));
   }
 
+  itemInterval() {
+    var window = GameManager.window;
+
+    this.interval.push(setInterval(() => {
+      if (this.menu.item.main){
+        this.itemEvent();
+      }
+
+      window.menu.itemClear();
+      window.menu.itemDraw();
+    }, 1000/GameManager.FPS-10));
+  }
+
   mapEvent() {
     var key = GameManager.game.key;
     key.event();
@@ -94,6 +115,17 @@ class SceneMenu {
     if (key.input.back){
       key.input.back = false;
       this.clear("map");
+      this.menu.start = true;
+    }
+  }
+
+  itemEvent() {
+    var key = GameManager.game.key;
+    key.event();
+
+    if (key.input.back){
+      key.input.back = false;
+      this.clear("item");
       this.menu.start = true;
     }
   }

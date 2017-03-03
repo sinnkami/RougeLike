@@ -23,6 +23,7 @@ class GamePlayer {
     }
 
     this.personalEffects = [];
+    this.personalEffectsSize = 20;
 
     this.street = false;
 
