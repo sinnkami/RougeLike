@@ -1,5 +1,8 @@
 class GameMap {
   constructor(width, height) {
+    this.width = width;
+    this.height = height;
+
     if ( width === undefined) this.width  = 32;
     if (height === undefined) this.height = 32;
 

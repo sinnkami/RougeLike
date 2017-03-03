@@ -64,6 +64,9 @@ class Manager {
       }else if (!this.scene.damage.execution.player && !this.scene.damage.execution.enemy && this.game.key.input.enter){
         this.game.key.input.enter = false;
         this.scene.damage.attack();
+      }else if (this.game.key.input.back){
+        this.game.key.input.back = false;
+        this.scene.menu.start();
       }
 
     }, 1000/this.FPS);

@@ -5,6 +5,7 @@ class WindowMiniMap {
 
   draw() {
     if (!GameManager.game.miniMap.invalidation) {
+      GameManager.canui.globalAlpha = 0.6;
       for (var y = 0; y < GameManager.game.miniMap.data.length; y++){
         for (var x = 0; x < GameManager.game.miniMap.data.length; x++){
           if (GameManager.game.miniMap.data[y][x] != GameManager.game.map.number.wall){
@@ -13,6 +14,7 @@ class WindowMiniMap {
           }
         }
       }
+      GameManager.canui.globalAlpha = 1.0;
     }
   }
 }
