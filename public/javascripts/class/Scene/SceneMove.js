@@ -17,10 +17,10 @@ class SceneMove {
       return;
     }
 
-    if (this.key.up) { x += 0; y += -1; }
-    if (this.key.down) { x += 0; y += 1; }
-    if (this.key.right) { x += 1; y += 0; }
-    if (this.key.left) { x += -1; y += 0; }
+    if (this.key.up) { x = 0; y += -1; }
+    if (this.key.down) { x = 0; y += 1; }
+    if (this.key.right) { x += 1; y = 0; }
+    if (this.key.left) { x += -1; y = 0; }
 
     var canMove = GameManager.game.map.canMove(x, y, player.isPosition());
     player.moveAnime(x, y);

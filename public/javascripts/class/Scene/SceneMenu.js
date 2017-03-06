@@ -11,6 +11,13 @@ class SceneMenu {
     }
 
     this.interval = [];
+
+    this.amount = -1;
+    for (var i = 0; i < GameManager.game.player.personalEffects.length; i += 2){
+      this.amount++;
+    }
+
+    this.evenOdd = GameManager.game.player.personalEffects.length % 2;
   }
 
   clear(stopEvent, stopEventSub) {
@@ -121,12 +128,58 @@ class SceneMenu {
 
   itemEvent() {
     var key = GameManager.game.key;
+    var menu = GameManager.window.menu;
     key.event();
 
     if (key.input.back){
       key.input.back = false;
       this.clear("item");
       this.menu.start = true;
+    }
+
+    if (this.amount < 0){
+      return;
+    }
+
+    if (key.input.up && menu.position.y != 0){
+      key.input.up = false;
+      menu.position.y--;
+    }
+
+    if (key.input.down && menu.position.y == this.amount-1 && menu.position.x == 1 && this.evenOdd == 1) {
+      key.input.down = false;
+      menu.position.x = 0;
+      menu.position.y++;
+    }else if (key.input.down && menu.position.y != this.amount){
+      key.input.down = false;
+      menu.position.y++;
+    }
+
+    if (key.input.right && menu.position.y != this.amount && menu.position.x == 1){
+      key.input.right = false;
+      menu.position.x = 0;
+      menu.position.y++;
+    }else if (key.input.right && menu.position.y == 0 && this.evenOdd == 0){
+      key.input.right = false;
+      menu.position.x = 1;
+    }else if (key.input.right && menu.position.y == this.amount && this.evenOdd == 0) {
+      key.input.right = false;
+      menu.position.x = 1;
+    }else if (key.input.right && menu.position.y != this.amount && menu.position.x == 0) {
+      key.input.right = false;
+      menu.position.x = 1;
+    }
+
+    if (key.input.left && menu.position.y != 0 && menu.position.x == 0){
+      key.input.left = false;
+      menu.position.x = 1;
+      menu.position.y--;
+    }else if (key.input.left && menu.position.y == 0 && menu.position.x == 1){
+      key.input.left = false;
+      menu.position.x = 0;
+    }else if (key.input.left && menu.position.y != 0 && menu.position.x == 1){
+      key.input.left = false;
+      menu.position.x = 0;
     }
   }
 }

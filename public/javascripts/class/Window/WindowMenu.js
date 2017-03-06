@@ -12,6 +12,11 @@ class WindowMenu {
       x: 0,
       y: 0,
     };
+
+    this.lastPosition = {
+      x: false,
+      y: 0,
+    }
   }
 
   mapClear() {
@@ -93,7 +98,7 @@ class WindowMenu {
     if (items.length != 0){
 
       context.fillStyle = "grey";
-      context.fillRect(x+(20*this.position.x) + 20, y+(22*this.position.y)+8, 120, 17);
+      context.fillRect(x+(150*this.position.x) + 20, y+(22*this.position.y)+8, 120, 17);
 
       for (var i = 0; i < items.length; i += 2){
         context.fillStyle = "red";
