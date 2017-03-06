@@ -59,10 +59,24 @@ class GamePlayer {
   LvUP() {
     this.status.exp = 0;
     this.status.nextLevel = this.status.nextLevel+this.status.nextLevel/2;
+    var increase = {
+      hp: Math.ceil(Math.random() * 4),
+      attack: Math.floor(Math.random() * 4),
+      defense: Math.floor(Math.random() * 4),
+    }
+
+    this.status.hp += increase.hp;
+    this.status.maxhp += increase.hp;
+    this.status.attack += increase.attack;
+    this.status.defense += increase.defense;
+
+    GameManager.game.logs.nonePush(`------------------------------------------------------`);
+    GameManager.game.logs.nonePush(`DEF: ${increase.defense}`);
+    GameManager.game.logs.nonePush(`ATK: ${increase.attack}`);
+    GameManager.game.logs.nonePush(`HP: ${increase.hp}`);
+
     GameManager.game.logs.push(`${this.status.name}のレベルが上がった`);
-    GameManager.game.logs.nonePush(`
-      ステータスの増加値をここに書く
-    `)
+    GameManager.game.logs.nonePush(`------------------------------------------------------`);
     this.status.level++;
   }
 
