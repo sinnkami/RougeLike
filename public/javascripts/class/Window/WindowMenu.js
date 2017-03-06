@@ -11,6 +11,9 @@ class WindowMenu {
     this.position = {
       x: 0,
       y: 0,
+      sub: {
+        y: 0
+      },
     };
 
     this.lastPosition = {
@@ -25,6 +28,10 @@ class WindowMenu {
 
   itemClear() {
     GameManager.canui.clearRect(this.x + 150, this.y + 20, 300, 400);
+  }
+
+  itemSubClear() {
+    GameManager.canui.clearRect(this.x + 450, this.y + 20, 70, 50);
   }
 
   draw() {
@@ -112,11 +119,39 @@ class WindowMenu {
           context.fillText(items[i+1].name, x + 170, y+(i/2+1)*22, 120);
         }
       }
+
+      context.fillStyle = "black";
+      context.font = "20px normal";
+      context.fillText(items[2*(this.position.y)+this.position.x].description, x + 3, y + 270, 294);
     }else {
       context.font = "20px normal";
       context.fillStyle = "white";
       context.fillText("何も持っていない", x + 20, y + 22);
     }
+  }
 
+  itemSubDraw() {
+    var context = GameManager.canui;
+    var items = GameManager.game.player.personalEffects;
+
+    var x = this.x + 450;
+    var y = this.y + 20;
+
+    // フレーム
+    context.fillStyle = "skyblue";
+    context.fillRect(x, y, 70, 50);
+
+    if (this.position.sub.y == 0){
+      context.fillStyle = "grey";
+      context.fillRect(x+3, y+3, 40, 20);
+    }else if (this.position.sub.y == 1){
+      context.fillStyle = "grey";
+      context.fillRect(x+3, y+24, 60, 20);
+    }
+
+    context.font = "18px normal";
+    context.fillStyle = "black";
+    context.fillText("使う", x+5, y+20);
+    context.fillText("捨てる", x+5, y+40);
   }
 }

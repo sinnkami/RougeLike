@@ -4,6 +4,7 @@ class SceneMenu {
       start:true,
       item: {
         main: false,
+         sub: false,
       },
       map: false,
       search: false,
@@ -27,7 +28,7 @@ class SceneMenu {
     this.interval.pop();
     if (stopEvent == "item"){
       if (stopEventSub){
-
+        this.menu[stopEvent][stopEventSub] = false;
       }else {
         this.menu[stopEvent]["main"] = false;
       }
@@ -108,10 +109,24 @@ class SceneMenu {
     this.interval.push(setInterval(() => {
       if (this.menu.item.main){
         this.itemEvent();
+        window.menu.itemSubClear();
       }
 
       window.menu.itemClear();
       window.menu.itemDraw();
+    }, 1000/GameManager.FPS-10));
+  }
+
+  itemSubInterval(itemNumber) {
+    var window = GameManager.window;
+
+    this.interval.push(setInterval(() => {
+      if (this.menu.item.sub){
+        this.itemSubEvent();
+      }
+
+      window.menu.itemSubClear();
+      window.menu.itemSubDraw();
     }, 1000/GameManager.FPS-10));
   }
 
@@ -135,6 +150,13 @@ class SceneMenu {
       key.input.back = false;
       this.clear("item");
       this.menu.start = true;
+    }
+
+    if (key.input.enter){
+      key.input.enter = false;
+      this.menu.item.main = false;
+      this.menu.item.sub = true;
+      this.itemSubInterval(2*(menu.position.y)+menu.position.x);
     }
 
     if (this.amount < 0){
@@ -180,6 +202,39 @@ class SceneMenu {
     }else if (key.input.left && menu.position.y != 0 && menu.position.x == 1){
       key.input.left = false;
       menu.position.x = 0;
+    }
+  }
+
+  itemSubEvent(itemNumber) {
+    var key = GameManager.game.key;
+    var menu = GameManager.window.menu;
+    key.event();
+
+    if (key.input.back){
+      key.input.back = false;
+      this.clear("item", "sub");
+      this.menu.item.main = true;
+    }
+
+    if (key.input.enter){
+      key.input.enter = false;
+      this.clear("item", "sub");
+      this.clear("item");
+      this.clear("start");
+      if (menu.position.sub.y == 0){
+        GameManager.scene.item.use();
+      }else if (menu.position.sub.y == 1) {
+        GameManager.scene.item.abdicate();
+      }
+    }
+
+    if (key.input.up && menu.position.sub.y != 0){
+      key.input.up = false;
+      menu.position.sub.y--;
+    }
+    if (key.input.down && menu.position.sub.y != 1){
+      key.input.down = false;
+      menu.position.sub.y++;
     }
   }
 }
