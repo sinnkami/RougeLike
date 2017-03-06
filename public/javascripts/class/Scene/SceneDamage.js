@@ -28,6 +28,8 @@ class SceneDamage {
       enemy.status.hp -= damage;
       if (enemy.dead()){
         GameManager.game.logs.push(`${enemy.status.name}を倒した`);
+        GameManager.game.logs.push(`${enemy.status.exp}ポイントの経験値を習得した`);
+        player.exp(enemy.status.exp);
       }
     }
 

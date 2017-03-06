@@ -48,6 +48,24 @@ class GamePlayer {
 
   }
 
+  exp(exp) {
+    this.status.untilNowExp += exp;
+    this.status.exp += exp;
+    if (this.status.exp >= this.status.nextLevel){
+      this.LvUP();
+    }
+  }
+
+  LvUP() {
+    this.status.exp = 0;
+    this.status.nextLevel = this.status.nextLevel+this.status.nextLevel/2;
+    GameManager.game.logs.push(`${this.status.name}のレベルが上がった`);
+    GameManager.game.logs.nonePush(`
+      ステータスの増加値をここに書く
+    `)
+    this.status.level++;
+  }
+
   isStreet(px, py, map) {
     var number = GameManager.game.map.number;
     var front = this.inFront();
