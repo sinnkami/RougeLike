@@ -18,7 +18,6 @@ class SceneItem {
     var player = GameManager.game.player;
     var item = player.personalEffects[i];
     var result;
-    console.log(player.personalEffects, i);
     if (item.effect == "recovering"){ result = this.recovering(player, item); }
     else { throw new Error("設定されていません！！"); }
 

@@ -22,6 +22,7 @@ class GameItem {
       var item = $.extend(true, {}, this.recovering[rand]);
       item.position[0] = x;
       item.position[1] = y;
+      item.description += x+y
       return item;
     }
   }

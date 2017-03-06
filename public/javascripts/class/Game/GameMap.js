@@ -122,7 +122,7 @@ class GameMap {
           this.data[y-1][x-1] == this.number.road && this.data[y-1][x] == this.number.road && this.data[y-1][x+1] == this.number.road &&
           this.data[y][x-1] == this.number.road && this.data[y][x] == this.number.road && this.data[y][x+1] == this.number.road &&
           this.data[y+1][x-1] == this.number.road && this.data[y+1][x] == this.number.road && this.data[y+1][x+1] == this.number.road &&
-          Math.floor(Math.random() * 50) == 0
+          Math.floor(Math.random() * 1) == 0
         ) {
           var item = GameManager.game.item.set(x, y);
           this.items.push(item);

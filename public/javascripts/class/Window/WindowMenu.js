@@ -94,10 +94,8 @@ class WindowMenu {
     var y = this.y + 20;
 
     // フレーム
-    context.fillStyle = "orange";
-    context.fillRect(x, y, 300, 235);
-    context.fillStyle = "yellow";
-    context.fillRect(x, y+235, 300, 70);
+    context.drawImage(this.image, x, y, 300, 235);
+    context.drawImage(this.image, x, y+235, 300, 70);
 
     // アイテムの画像と名前
     context.font = "17px normal";
@@ -108,19 +106,17 @@ class WindowMenu {
       context.fillRect(x+(150*this.position.x) + 20, y+(22*this.position.y)+8, 120, 17);
 
       for (var i = 0; i < items.length; i += 2){
-        context.fillStyle = "red";
-        context.fillRect(x + 3, y+(22*(i/2))+8, 17, 17);
+        context.drawImage(items[i].image, x + 3, y+(22*(i/2))+8, 17, 17);
         context.fillStyle = "white";
         context.fillText(items[i].name, x + 20, y+(i/2+1)*22, 120);
         if (items[i+1]){
-          context.fillStyle = "red";
-          context.fillRect(x + 153, y+(22*(i/2))+8, 17, 17);
+          context.drawImage(items[i].image, x + 153, y+(22*(i/2))+8, 17, 17);
           context.fillStyle = "white";
           context.fillText(items[i+1].name, x + 170, y+(i/2+1)*22, 120);
         }
       }
 
-      context.fillStyle = "black";
+      context.fillStyle = "white";
       context.font = "20px normal";
       context.fillText(items[2*(this.position.y)+this.position.x].description, x + 3, y + 270, 294);
     }else {
@@ -139,7 +135,7 @@ class WindowMenu {
 
     // フレーム
     context.fillStyle = "skyblue";
-    context.fillRect(x, y, 70, 50);
+    context.drawImage(this.image, x, y, 70, 50);
 
     if (this.position.sub.y == 0){
       context.fillStyle = "grey";
@@ -150,7 +146,7 @@ class WindowMenu {
     }
 
     context.font = "18px normal";
-    context.fillStyle = "black";
+    context.fillStyle = "white";
     context.fillText("使う", x+5, y+20);
     context.fillText("捨てる", x+5, y+40);
   }

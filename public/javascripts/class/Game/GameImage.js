@@ -16,6 +16,8 @@ class GameImage {
     for (var i = 0; i < 1; i++){
       this.item.push(new Image());
     }
+
+    this.item[0].src = "/images/items/0.png";
   }
 
   enemy() {
