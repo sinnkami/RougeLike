@@ -122,7 +122,7 @@ class SceneMenu {
 
     this.interval.push(setInterval(() => {
       if (this.menu.item.sub){
-        this.itemSubEvent();
+        this.itemSubEvent(itemNumber);
       }
 
       window.menu.itemSubClear();
@@ -222,9 +222,9 @@ class SceneMenu {
       this.clear("item");
       this.clear("start");
       if (menu.position.sub.y == 0){
-        GameManager.scene.item.use();
+        GameManager.scene.item.use(itemNumber);
       }else if (menu.position.sub.y == 1) {
-        GameManager.scene.item.abdicate();
+        GameManager.scene.item.abdicate(itemNumber);
       }
     }
 
