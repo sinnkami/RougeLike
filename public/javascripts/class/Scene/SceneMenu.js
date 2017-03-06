@@ -8,7 +8,7 @@ class SceneMenu {
       },
       map: false,
       search: false,
-      gameEnd: false,
+      logs: false,
     }
 
     this.interval = [];
@@ -86,6 +86,10 @@ class SceneMenu {
         this.menu.start = false;
         this.menu.map = true;
         this.mapInterval();
+      }else if (menu.position.x == 1 && menu.position.y == 1) {
+        this.menu.start = false;
+        this.menu.logs = true;
+        this.logsInterval();
       }
     }
   }
@@ -127,6 +131,19 @@ class SceneMenu {
 
       window.menu.itemSubClear();
       window.menu.itemSubDraw();
+    }, 1000/GameManager.FPS-10));
+  }
+
+  logsInterval() {
+    var window = GameManager.window;
+
+    this.interval.push(setInterval(() => {
+      if (this.menu.logs){
+        this.logsEvent();
+      }
+
+      window.menu.logsClear();
+      window.menu.logsDraw();
     }, 1000/GameManager.FPS-10));
   }
 
@@ -233,6 +250,27 @@ class SceneMenu {
       menu.position.sub.y--;
     }
     if (key.input.down && menu.position.sub.y != 1){
+      key.input.down = false;
+      menu.position.sub.y++;
+    }
+  }
+
+  logsEvent() {
+    var key = GameManager.game.key;
+    var menu = GameManager.window.menu;
+    key.event();
+
+    if (key.input.back){
+      key.input.back = false;
+      this.clear("logs");
+      this.menu.start = true;
+    }
+
+    if (key.input.up && menu.position.sub.y != 0){
+      key.input.up = false;
+      menu.position.sub.y--;
+    }
+    if (key.input.down && menu.position.sub.y <= GameManager.game.logs.all.length-20){
       key.input.down = false;
       menu.position.sub.y++;
     }

@@ -34,6 +34,10 @@ class WindowMenu {
     GameManager.canui.clearRect(this.x + 450, this.y + 20, 70, 50);
   }
 
+  logsClear() {
+    GameManager.canui.clearRect(this.x + 130, this.y, 340, 340);
+  }
+
   draw() {
     var context = GameManager.canui;
 
@@ -48,7 +52,7 @@ class WindowMenu {
     }else if (this.position.x == 0 && this.position.y == 1) {
       context.fillRect(this.x+2, this.y+40, 67, 25);
     }else if (this.position.x == 1 && this.position.y == 1) {
-      context.fillRect(this.x+77, this.y+40, 67, 25);
+      context.fillRect(this.x+77, this.y+40, 47, 25);
     }
 
     // メニューコマンド
@@ -59,7 +63,7 @@ class WindowMenu {
     context.fillText("持ち物", this.x+5, this.y+25);
     context.fillText("マップ", this.x+80, this.y+25);
     context.fillText("調べる", this.x+5, this.y+60);
-    context.fillText("終わる", this.x+80, this.y+60);
+    context.fillText("ログ", this.x+80, this.y+60);
   }
 
   mapDraw() {
@@ -149,5 +153,24 @@ class WindowMenu {
     context.fillStyle = "white";
     context.fillText("使う", x+5, y+20);
     context.fillText("捨てる", x+5, y+40);
+  }
+
+  logsDraw() {
+    var context = GameManager.canui;
+    var logs = GameManager.game.logs.all;
+
+    var x = this.x + 130;
+    var y = this.y;
+
+    context.drawImage(this.image, x, y, 340, 340);
+    context.textAlign = "start";
+    context.font = "16px normal";
+    for (var i = 0; i < 20; i++){
+      if (logs[i+this.position.sub.y]) {
+        context.fillText(logs[i+this.position.sub.y], x+5, y+(16*i)+21, 330);
+      }else {
+        break;
+      }
+    }
   }
 }
