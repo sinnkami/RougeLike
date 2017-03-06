@@ -90,6 +90,8 @@ class SceneMenu {
         this.menu.start = false;
         this.menu.logs = true;
         this.logsInterval();
+      }else if (menu.position.x == 0 && menu.position.y == 1) {
+        this.searchEvent();
       }
     }
   }
@@ -274,5 +276,17 @@ class SceneMenu {
       key.input.down = false;
       menu.position.sub.y++;
     }
+  }
+
+  searchEvent() {
+    var position = GameManager.game.player.isPosition();
+    for (var i = 0; i < GameManager.game.map.items.length; i++){
+      if (GameManager.game.map.items[i].position[0] == position[0] && GameManager.game.map.items[i].position[1] == position[1]){
+        GameManager.scene.item.get(i);
+      }
+    }
+
+    this.clear("search");
+    this.clear("start");
   }
 }
