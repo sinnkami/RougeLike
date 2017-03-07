@@ -130,8 +130,28 @@ class Manager {
   }
 
   gameover() {
+
+    this.cananimation.restore();
     setTimeout(() => {
       this.stopInterval();
+        setInterval(() => {
+          this.gameoverDraw();
+        }, 1000/this.FPS);
     }, 500);
+  }
+
+  gameoverDraw() {
+    var context = this.canui;
+    var image = this.game.image.window;
+    context.drawImage(image, 180, 60, 300, 300);
+
+    context.font = "20px normal";
+    context.fillStyle = "white";
+    context.textAlign = "start";
+    context.fillText(`${this.game.player.status.name}のスコア`, 210, 100, 250);
+    context.fillText(`${this.game.player.point} Point`, 210, 130, 250);
+    context.fillText(`体力 : ${this.game.player.status.maxhp}`, 210, 200);
+    context.fillText(`攻撃力 : ${this.game.player.status.attack}`, 190, 220);
+    context.fillText(`防御力 : ${this.game.player.status.defense}`, 190, 240);
   }
 }
