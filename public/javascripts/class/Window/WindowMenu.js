@@ -27,7 +27,7 @@ class WindowMenu {
   }
 
   itemClear() {
-    GameManager.canui.clearRect(this.x + 150, this.y + 20, 300, 400);
+    GameManager.canui.clearRect(this.x + 150, this.y + 20, 300, 300);
   }
 
   itemSubClear() {
@@ -182,5 +182,18 @@ class WindowMenu {
     var y = 340;
 
     context.drawImage(this.image, x, y, GameManager.canvas.width-20, 130);
+
+    context.fillStyle = "white";
+    context.textAlign = "start";
+
+    context.font = "30px normal";
+    context.fillText(`[ダンジョン]  ${GameManager.game.hierarchy}${GameManager.window.statusBar.expression}`, x+20, y+30);
+
+    // ステータス
+    context.font = "20px normal";
+    context.fillText(`体力 : ${player.status.hp}/${player.status.maxhp}`, x+470, y+40);
+    context.fillText(`攻撃力 : ${player.status.attack}`, x+450, y+60);
+    context.fillText(`防御力 : ${player.status.attack}`, x+450, y+80);
+    context.fillText(`満腹度 : ${player.status.stomach}%`, x+450, y+100);
   }
 }
