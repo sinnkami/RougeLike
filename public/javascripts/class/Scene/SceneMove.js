@@ -30,6 +30,7 @@ class SceneMove {
       enemes[i].moveAnime(x, y);
     }
     if (canMove[0] && !this.move){
+      player.turn();
       player.move(x, y, [canMove[1], canMove[2]]);
       for (var i = 0; i < enemes.length; i++){
         enemes[i].move();

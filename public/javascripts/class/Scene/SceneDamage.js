@@ -20,6 +20,7 @@ class SceneDamage {
 
   playerTurn() {
     var player = GameManager.game.player;
+    player.turn();
     this.execution.player = true;
     var enemy = GameManager.game.enemy(player.canAttack());
 
@@ -75,6 +76,10 @@ class SceneDamage {
       var damage = GameManager.scene.damage.damage(attacker[i], player);
       player.status.hp -= damage;
 
+      if (player.status.hp <= 0){
+        player.status.hp = 0;
+      }
+
       var result = attacker[i].towardsPlayer();
       var x = result[0];
       var y = result[1];
@@ -109,16 +114,34 @@ class SceneDamage {
 
   damage(attacker, defender) {
     var damage = attacker.status.attack - defender.status.defense;
+    var critical = false;
     if (damage > GameManager.game.largestDamage) {
       damage = GameManager.game.largestDamage;
     }
 
-    if (damage < 0){
-      damage = 0;
+    if (attacker.status.critical >= Math.ceil(Math.random() * 100)){
+      critical = true;
+      damage *= 3;
     }
 
-    if (damage == 0){
+    if (damage <= 0){
+      if (Math.abs(100/damage) < 0){
+        damage = 1;
+      }else {
+        damage = 0;
+
+      }
+    }
+
+    if (damage == 0 || attacker.status.accuracy <= Math.ceil(Math.random() * 100)){
       GameManager.game.logs.push(`${attacker.status.name}は攻撃を外した`);
+    }else if (critical) {
+      if (attacker.status.level){
+        GameManager.game.logs.push(`会心の一撃！！`)
+      }else {
+        GameManager.game.logs.push(`痛恨の一撃！！`)
+      }
+      GameManager.game.logs.push(`${attacker.status.name}は${defender.status.name}に${damage}ダメージを与えた`)
     }else {
       GameManager.game.logs.push(`${attacker.status.name}は${defender.status.name}に${damage}ダメージを与えた`)
     }

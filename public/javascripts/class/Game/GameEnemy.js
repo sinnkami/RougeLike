@@ -1,18 +1,25 @@
 class GameEnemy {
-  init(number) {
+  init(number, status) {
     this.number = number;
     this.direction = {
       x: 1,
       y: 0
     };
 
-    this.status = {
+    var power = Math.floor((GameManager.game.player.status.level/3)*GameManager.game.hierarchy);
+    console.log(power);
+    if (power < 1){
+      power = 1;
+    }
+    this.status = status || {
       name: "エネミー１",
-      exp: 5,
-      hp: 10,
-      maxhp: 100,
-      attack: 1,
-      defense: 0
+      exp: 5*power,
+      hp: 10*power,
+      maxhp: 10*power,
+      attack: 1*power,
+      defense: power*1,
+      accuracy: 80,
+      critical: power
     }
 
     this.image = GameManager.game.image.enemy();

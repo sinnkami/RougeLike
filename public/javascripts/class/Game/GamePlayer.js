@@ -18,12 +18,17 @@ class GamePlayer {
       untilNowExp: 0,
       hp: 100,
       maxhp: 100,
-      attack: 1,
-      defense: 0
+      attack: 2,
+      defense: 0,
+      stomach: 100,
+      accuracy: 80,
+      critical: 5
     }
 
     this.personalEffects = [];
     this.personalEffectsSize = 20;
+
+    this.turnNumber = 0;
 
     this.street = false;
 
@@ -35,6 +40,30 @@ class GamePlayer {
       return true;
     }else {
       return false;
+    }
+  }
+
+  turn() {
+    this.turnNumber++;
+
+    if (this.status.stomach == 0){
+      this.status.hp--;
+      return;
+    }
+    if (this.turnNumber % 10 == 0){
+      this.status.stomach--;
+    }
+
+    if (this.turnNumber % 50 == 0){
+      GameManager.game.enemes.push(GameManager.game.map.setEnemy());
+    }
+
+    if (this.status.stomach == 50 && this.turnNumber % 10 == 0){
+      GameManager.game.logs.push("少しお腹がすいてきたようだ");
+    }else if (this.status.stomach == 30 && this.turnNumber % 10 == 0){
+      GameManager.game.logs.push("お腹がすいてきたようだ");
+    }else if (this.status.stomach == 5 && this.turnNumber % 10 == 0){
+      GameManager.game.logs.push("お腹が空きすぎて死にそうだ");
     }
   }
 

@@ -23,11 +23,12 @@ class WindowStatusBar {
 
     var canui = GameManager.canui;
 
-    canui.textAlign = "start";
+    canui.textAlign = "right";
     canui.font = "34px normal";
     canui.fillStyle = "white";
-    canui.fillText(hierarchy, this.x + 20, this.y);
+    canui.fillText(hierarchy, this.x + 35, this.y);
     canui.fillStyle = "dodgerblue";
+    canui.textAlign = "start";
     canui.fillText(this.expression, this.x + 40, this.y);
 
     canui.font = "25px normal";

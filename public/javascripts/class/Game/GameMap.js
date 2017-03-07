@@ -96,6 +96,29 @@ class GameMap {
     return this.setEnemy();
   }
 
+  setStrongEnemy() {
+    loop: for (var y = 1; y < this.data.length; y++){
+      for (var x = 1; x < this.data.length; x++){
+        if ( // 周囲のマスが道の時の判定 + 乱数
+          this.data[y-1][x-1] == this.number.road && this.data[y-1][x] == this.number.road && this.data[y-1][x+1] == this.number.road &&
+          this.data[y][x-1] == this.number.road && this.data[y][x] == this.number.road && this.data[y][x+1] == this.number.road &&
+          this.data[y+1][x-1] == this.number.road && this.data[y+1][x] == this.number.road && this.data[y+1][x+1] == this.number.road &&
+          Math.floor(Math.random() * 100) == 0
+        ) {
+          this.data[y][x] = this.number.enemy;
+          var enemy = new GameEnemy();
+          enemy.init(this.number.enemy);
+
+          this.number.enemy--;
+          return enemy;
+          break loop;
+        }
+      }
+    }
+
+    return this.setStrongEnemy();
+  }
+
   setStairs() {
     loop: for (var y = this.data.length-1; y > 0; y--){
       for (var x = this.data.length-1; x > 0; x--){

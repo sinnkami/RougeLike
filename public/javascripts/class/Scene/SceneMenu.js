@@ -1,7 +1,7 @@
 class SceneMenu {
   init() {
     this.menu = {
-      start:true,
+      start: true,
       item: {
         main: false,
          sub: false,
@@ -52,6 +52,7 @@ class SceneMenu {
         window.uiClear();
         window.menu.draw();
         window.statusBar.draw();
+        window.menu.statusDraw();
       }
     }, 1000/GameManager.FPS-10));
   }

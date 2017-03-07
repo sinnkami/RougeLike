@@ -77,13 +77,20 @@ class Manager {
           }
         }
         if (!get){
-          this.scene.damage.attack();          
+          this.scene.damage.attack();
         }
       }else if (this.game.key.input.back){
         this.game.key.input.back = false;
         this.scene.menu.start();
       }
 
+      if (this.game.player.status.hp <= 0 && this.game.play){
+        this.game.logs.push(`${this.game.player.status.name}は死んでしまった`);
+        this.game.play = false;
+        this.gameover();
+      }
+
+      console.log(this.game.player.turnNumber);
     }, 1000/this.FPS);
   }
 
@@ -121,5 +128,11 @@ class Manager {
         return;
       }
     }, 1000/this.FPS);
+  }
+
+  gameover() {
+    setTimeout(() => {
+      this.stopInterval();
+    }, 500);
   }
 }

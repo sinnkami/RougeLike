@@ -173,4 +173,14 @@ class WindowMenu {
       }
     }
   }
+
+  statusDraw() {
+    var context = GameManager.canui;
+    var player = GameManager.game.player;
+
+    var x = 10;
+    var y = 340;
+
+    context.drawImage(this.image, x, y, GameManager.canvas.width-20, 130);
+  }
 }
