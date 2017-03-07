@@ -10,8 +10,9 @@ class GamePlayer {
       y: 0
     };
 
+    var name = decodeURI(location.search.substring(1).split("&")[0].split("=")[1]);
     this.status = {
-      name: "プレイヤー",
+      name: name || "プレイヤー",
       level: 1,
       nextLevel: 10,
       exp: 0,
