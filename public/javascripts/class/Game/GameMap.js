@@ -152,8 +152,6 @@ class GameMap {
         }
       }
     }
-
-    console.log(this.items);
   }
 
   canMove(x, y, position){

@@ -90,7 +90,6 @@ class Manager {
         this.gameover();
       }
 
-      console.log(this.game.player.turnNumber);
     }, 1000/this.FPS);
   }
 

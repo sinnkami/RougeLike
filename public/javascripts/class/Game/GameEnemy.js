@@ -22,6 +22,8 @@ class GameEnemy {
       critical: power
     }
 
+    this.point = Math.ceil(GameManager.game.hierarchy*(Math.random()*this.status.exp));
+
     this.image = GameManager.game.image.enemy();
 
     var position = this.isPosition();

@@ -6,7 +6,7 @@ class GameBase {
 
     this.hierarchy = 0;
 
-    this.unitOfCurrency = "G";
+    this.unitOfCurrency = "P";
 
     this.largestDamage = 255;
 

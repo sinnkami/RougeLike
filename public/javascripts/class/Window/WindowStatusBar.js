@@ -67,7 +67,7 @@ class WindowStatusBar {
     canui.fillText(GameManager.game.unitOfCurrency, this.x + 580, this.y);
     canui.textAlign = "right";
     canui.fillStyle = "white";
-    canui.fillText(player.money, this.x + 575, this.y);
+    canui.fillText(player.point, this.x + 575, this.y, 150);
 
   }
 }

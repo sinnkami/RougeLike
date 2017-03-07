@@ -32,7 +32,7 @@ class GamePlayer {
 
     this.street = false;
 
-    this.money = 100;
+    this.point = 0;
   }
 
   dead() {

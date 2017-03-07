@@ -189,6 +189,8 @@ class WindowMenu {
     context.font = "30px normal";
     context.fillText(`[ダンジョン]  ${GameManager.game.hierarchy}${GameManager.window.statusBar.expression}`, x+20, y+30);
 
+    context.fillText(`現在のポイント : ${player.point}P`, x+20, y+70, 425);
+
     // ステータス
     context.font = "20px normal";
     context.fillText(`体力 : ${player.status.hp}/${player.status.maxhp}`, x+470, y+40);
