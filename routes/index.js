@@ -31,4 +31,25 @@ router.post(`/score`, function (req, res) {
   });
 })
 
+router.get('/ranking', function (req, res) {
+  res.render('ranking');
+})
+
+router.post('/ranking', function (req, res) {
+  pg.connect(process.env.DATABASE_URL, (error, client) => {
+    if (error) { console.error(error); }
+    var query = client.query('SELECT * FROM score ORDER BY score DESC LIMIT 100',
+    [],
+    (err, result) => {
+      if (err) { console.error(err); }
+
+      client.end((err) => {
+        if (err) throw err;
+        res.json(result);
+        res.sendStatus(200);
+      });
+    });
+  });
+})
+
 module.exports = router;
