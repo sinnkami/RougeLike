@@ -46,7 +46,6 @@ router.post('/ranking', function (req, res) {
       client.end((err) => {
         if (err) throw err;
         res.json(result);
-        res.sendStatus(200);
       });
     });
   });
