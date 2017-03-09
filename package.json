@@ -2,9 +2,6 @@
   "name": "roguelike",
   "version": "0.0.0",
   "private": true,
-  "scripts": {
-    "start": "gulp"
-  },
   "dependencies": {
     "body-parser": "~1.15.2",
     "cookie-parser": "~1.4.3",
