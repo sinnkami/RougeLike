@@ -3,7 +3,7 @@ var router = express.Router();
 
 const pg = require('pg');
 
-const connectionString = "tcp://localhost:5432/game_rouge";
+const connectionString = "tcp://localhost:5432/rougelike::DATABASE";
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
