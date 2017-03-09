@@ -9,6 +9,8 @@ class Manager {
     this.sprite = sprite;
     this.window = window;
 
+    this.send;
+
     this.$window = $window;
 
     this.mainInterval;
@@ -134,6 +136,26 @@ class Manager {
     this.cananimation.restore();
     setTimeout(() => {
       this.stopInterval();
+      $.ajax({
+       type: "POST",
+       url: "/score",
+       data: {
+         name: this.game.player.status.name,
+         score: this.game.player.point,
+         level: this.game.player.status.level,
+         hp: this.game.player.status.maxhp,
+         attack: this.game.player.status.attack,
+         defense: this.game.player.status.defense
+       },
+       success: (result) => {
+         this.send = true;
+         console.log(result);
+       },
+       error: (err) => {
+         this.send = false;
+         console.log(err);
+       }
+     });
         setInterval(() => {
           this.gameoverDraw();
         }, 1000/this.FPS);
@@ -153,5 +175,12 @@ class Manager {
     context.fillText(`体力 : ${this.game.player.status.maxhp}`, 210, 200);
     context.fillText(`攻撃力 : ${this.game.player.status.attack}`, 190, 220);
     context.fillText(`防御力 : ${this.game.player.status.defense}`, 190, 240);
+    if (this.send == true){
+      context.fillText("スコアが送信されました", 190, 280);
+    }else if (this.send == false) {
+      context.fillText("スコアが送信されませんでした", 190, 280);
+    }else {
+      context.fillText("少々お待ちください", 190, 280);
+    }
   }
 }
