@@ -136,11 +136,13 @@ class Manager {
     this.cananimation.restore();
     setTimeout(() => {
       this.stopInterval();
+      var name = this.game.player.status.name.replace(/\</g, "#").replace(/\>/g, "#");
+      console.log(name);
       $.ajax({
        type: "POST",
        url: "/score",
        data: {
-         name: this.game.player.status.name,
+         name: name,
          score: this.game.player.point,
          level: this.game.player.status.level,
          hp: this.game.player.status.maxhp,
