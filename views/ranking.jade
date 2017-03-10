@@ -5,5 +5,18 @@ html
     script(src="/javascripts/ranking.js" charset="utf-8")
     title= title
     
+    link(rel="stylesheet" href="/css/ranking.css")
+    
   body
-    div.ranking
+    div
+      table.ranking
+        tr
+          th 順位
+          th 名前
+          th スコア
+          th レベル
+          th 最大HP
+          th 攻撃力
+          th 防御力
+        
+    a(href="/") 戻る

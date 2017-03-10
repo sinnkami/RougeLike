@@ -44,10 +44,10 @@ router.post('/ranking', function (req, res) {
     [],
     (err, result) => {
       if (err) { throw err; }
-
+      res.json(result);
       client.end((err) => {
         if (err) { throw err; }
-        res.json(result);
+
       });
     });
   });
