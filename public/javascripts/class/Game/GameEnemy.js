@@ -10,7 +10,7 @@ class GameEnemy {
 
     this.point = Math.ceil(GameManager.game.hierarchy*(Math.random()*this.status.exp));
 
-    this.image = GameManager.game.image.enemy();
+    this.image = GameManager.game.image.enemy(status.number);
 
     var position = this.isPosition();
     this.x = position[0]*32;

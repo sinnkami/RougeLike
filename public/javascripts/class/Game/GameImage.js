@@ -9,8 +9,11 @@ class GameImage {
     this.player = new Image();
     this.player.src = "/images/charcter/player.png";
 
-    this.enemes = [new Image()];
+    this.enemes = [new Image(), new Image(), new Image(), new Image()];
     this.enemes[0].src = "/images/charcter/enemy1.png";
+    this.enemes[1].src = "/images/charcter/enemy2.png";
+    this.enemes[2].src = "/images/charcter/enemy3.png";
+
 
     this.item = [];
     for (var i = 0; i < 2; i++){
@@ -21,8 +24,7 @@ class GameImage {
     this.item[1].src = "/images/items/1.png";
   }
 
-  enemy() {
-    var rand = Math.floor(Math.random() * this.enemes.length);
-    return this.enemes[rand];
+  enemy(num) {
+    return this.enemes[num];
   }
 }
