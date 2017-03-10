@@ -84,7 +84,9 @@ class GameMap {
         ) {
           this.data[y][x] = this.number.enemy;
           var enemy = new GameEnemy();
-          enemy.init(this.number.enemy);
+          GameManager.game.charcter.init();
+          var status = GameManager.game.charcter.enemy();
+          enemy.init(this.number.enemy, status);
 
           this.number.enemy--;
           return enemy;

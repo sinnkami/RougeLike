@@ -1,5 +1,5 @@
 class GameBase {
-  constructor(image, player, enemy, key, item, map, sound, miniMap, logs) {
+  constructor(image, player, enemy, key, item, map, sound, miniMap, logs, charcter) {
     this.play = false;
 
     this.image = image;
@@ -19,6 +19,7 @@ class GameBase {
     this.miniMap = miniMap;
     this.sound = sound;
     this.logs = logs;
+    this.charcter = charcter;
   }
 
   enemy(number) {

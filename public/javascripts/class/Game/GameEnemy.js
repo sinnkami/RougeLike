@@ -6,20 +6,7 @@ class GameEnemy {
       y: 0
     };
 
-    var power = Math.floor((GameManager.game.player.status.level/5)*GameManager.game.hierarchy);
-    if (power < 1){
-      power = 1;
-    }
-    this.status = status || {
-      name: "ゴブリン",
-      exp: 5*power,
-      hp: 10+(5*power),
-      maxhp: 10+(5*power),
-      attack: 1*power,
-      defense: power*1,
-      accuracy: 80,
-      critical: power
-    }
+    this.status = status;
 
     this.point = Math.ceil(GameManager.game.hierarchy*(Math.random()*this.status.exp));
 
