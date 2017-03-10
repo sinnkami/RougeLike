@@ -8,7 +8,7 @@ class GameBase {
 
     this.unitOfCurrency = "P";
 
-    this.largestDamage = 255;
+    this.largestDamage = 9999;
 
     this.player = player;
     this.enemes = [];
