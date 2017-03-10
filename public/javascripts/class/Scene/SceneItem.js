@@ -19,6 +19,7 @@ class SceneItem {
     var item = player.personalEffects[i];
     var result;
     if (item.effect == "recovering"){ result = this.recovering(player, item); }
+    else if (item.effect == "food"){ result = this.food(player, item); }
     else { throw new Error("設定されていません！！"); }
 
     if (result){
@@ -45,6 +46,25 @@ class SceneItem {
     }
 
     GameManager.game.logs.push(`HPが${recoveryAmount}ポイント回復した`);
+    return true;
+  }
+
+  food(player, item){
+    if (player.status.stomach == 100){
+      GameManager.game.logs.push("お腹いっぱいです");
+      return false;
+    }
+
+    var recoveryAmount = 100 - player.status.stomach;
+
+    if (recoveryAmount < item.data[0]){
+      player.status.stomach += recoveryAmount;
+    }else {
+      recoveryAmount = item.data[0];
+      player.status.stomach += recoveryAmount;
+    }
+
+    GameManager.game.logs.push(`${item.name}を食べた`);
     return true;
   }
 

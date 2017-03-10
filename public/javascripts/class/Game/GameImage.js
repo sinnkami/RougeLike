@@ -13,11 +13,12 @@ class GameImage {
     this.enemes[0].src = "/images/charcter/enemy1.png";
 
     this.item = [];
-    for (var i = 0; i < 1; i++){
+    for (var i = 0; i < 2; i++){
       this.item.push(new Image());
     }
 
     this.item[0].src = "/images/items/0.png";
+    this.item[1].src = "/images/items/1.png";
   }
 
   enemy() {
