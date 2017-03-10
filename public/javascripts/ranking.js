@@ -5,7 +5,8 @@ $(function() {
     type: "POST",
     url: "/ranking",
     success: (result) => {
-     console.log(result);
+     var data = result.row;
+     console.log(data);
    },
    error: (err) => {
      console.log(err);
