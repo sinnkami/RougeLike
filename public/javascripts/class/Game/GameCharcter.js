@@ -29,7 +29,7 @@ class GameCharcter {
         critical: power
       },
       {
-        number: 1,
+        number: 2,
         name: "ウルフ",
         exp: 15*power,
         hp: 10+(5*power),
