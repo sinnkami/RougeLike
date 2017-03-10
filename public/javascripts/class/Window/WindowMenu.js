@@ -114,7 +114,7 @@ class WindowMenu {
         context.fillStyle = "white";
         context.fillText(items[i].name, x + 20, y+(i/2+1)*22, 120);
         if (items[i+1]){
-          context.drawImage(items[i].image, x + 153, y+(22*(i/2))+8, 17, 17);
+          context.drawImage(items[i+1].image, x + 153, y+(22*(i/2))+8, 17, 17);
           context.fillStyle = "white";
           context.fillText(items[i+1].name, x + 170, y+(i/2+1)*22, 120);
         }
