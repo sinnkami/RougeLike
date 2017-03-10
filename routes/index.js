@@ -10,11 +10,11 @@ const connectionString = process.env.DATABASE_URL || "tcp://localhost:5432/game_
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
-  res.render('index');
+  res.render('index', { title: "RougeLike" });
 });
 
 router.get('/game', function (req, res) {
-  res.render('game');
+  res.render('game', { title: "RougeLike" });
 })
 
 router.post(`/score`, function (req, res) {
@@ -34,7 +34,7 @@ router.post(`/score`, function (req, res) {
 })
 
 router.get('/ranking', function (req, res) {
-  res.render('ranking');
+  res.render('ranking', { title: "RougeLike" });
 })
 
 router.post('/ranking', function (req, res) {
