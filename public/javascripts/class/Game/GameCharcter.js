@@ -34,7 +34,7 @@ class GameCharcter {
         exp: 15*power,
         hp: 10+(5*power),
         maxhp: 10+(5*power),
-        attack: 3*power,
+        attack: 2*power,
         defense: power*1,
         accuracy: 80,
         critical: power
