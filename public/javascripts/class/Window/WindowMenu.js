@@ -113,10 +113,20 @@ class WindowMenu {
         context.drawImage(items[i].image, x + 3, y+(22*(i/2))+8, 17, 17);
         context.fillStyle = "white";
         context.fillText(items[i].name, x + 20, y+(i/2+1)*22, 120);
+        if (items[i].data[1]){
+          context.font = "14px normal";
+          context.fillText("E", x + 13, y+(22*(i/2))+25);
+          context.font = "17px normal";
+        }
         if (items[i+1]){
           context.drawImage(items[i+1].image, x + 153, y+(22*(i/2))+8, 17, 17);
           context.fillStyle = "white";
           context.fillText(items[i+1].name, x + 170, y+(i/2+1)*22, 120);
+          if (items[i+1].data[1]){
+            context.font = "14px normal";
+            context.fillText("E", x + 165, y+(22*(i/2))+25);
+            context.font = "17px normal";
+          }
         }
       }
 
