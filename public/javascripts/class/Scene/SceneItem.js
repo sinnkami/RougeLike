@@ -21,6 +21,7 @@ class SceneItem {
     if (item.effect == "recovering"){ result = this.recovering(player, item); }
     else if (item.effect == "food"){ result = this.food(player, item); }
     else if (item.effect == "weapon"){ result = this.weapon(player, item); }
+    else if (item.effect == "protector"){ result = this.protector(player, item); }
     else { throw new Error("設定されていません！！"); }
 
     if (result){
@@ -83,6 +84,27 @@ class SceneItem {
     }else {
       item.data[1] = true;
       player.weapon = item;
+    }
+
+    GameManager.game.logs.push(`${item.name}を装備した`);
+
+    return true;
+  }
+
+  protector(player, item) {
+    if (player.protector == item){
+      player.protector.data[1] = false;
+      player.protector = null;
+      GameManager.game.logs.push(`${item.name}を外した`);
+      return true;
+    }
+    if (player.protector){
+      player.protector.data[1] = false;
+      item.data[1] = true;
+      player.protector = item;
+    }else {
+      item.data[1] = true;
+      player.protector = item;
     }
 
     GameManager.game.logs.push(`${item.name}を装備した`);

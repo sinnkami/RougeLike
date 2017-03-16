@@ -1,6 +1,6 @@
 class GameItem {
   init() {
-    this.category = 3;
+    this.category = 4;
     this.recovering = [
       {
         name: "テスト回復アイテム",
@@ -32,7 +32,7 @@ class GameItem {
         data: [10, false],
         canUse: Infinity,
         description: "テスト用の武器1号",
-        image: GameManager.game.image.item[2],
+        image: GameManager.game.image.item[3],
         position: [0, 0],
       }
     ]
@@ -44,7 +44,7 @@ class GameItem {
         data: [10, false],
         canUse: Infinity,
         description: "テスト用の防具1号",
-        image: GameManager.game.image.item[3],
+        image: GameManager.game.image.item[2],
         position: [0, 0],
       }
     ]
