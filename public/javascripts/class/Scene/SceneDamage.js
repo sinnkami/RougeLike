@@ -115,7 +115,19 @@ class SceneDamage {
   }
 
   damage(attacker, defender) {
-    var damage = attacker.status.attack - defender.status.defense;
+    if (attacker.weapon){
+      var weapon = attacker.weapon.data[0];
+    }else {
+      var weapon = 0;
+    }
+
+    if (defender.protector){
+      var protector = defender.protector.data[0];
+    }else {
+      var protector = 0;
+    }
+
+    var damage = (attacker.status.attack + weapon) - (defender.status.defense + protector);
     var critical = false;
     if (damage > GameManager.game.largestDamage) {
       damage = GameManager.game.largestDamage;

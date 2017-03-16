@@ -20,6 +20,7 @@ class SceneItem {
     var result;
     if (item.effect == "recovering"){ result = this.recovering(player, item); }
     else if (item.effect == "food"){ result = this.food(player, item); }
+    else if (item.effect == "weapon"){ result = this.weapon(player, item); }
     else { throw new Error("設定されていません！！"); }
 
     if (result){
@@ -68,6 +69,27 @@ class SceneItem {
     return true;
   }
 
+  weapon(player, item) {
+    if (player.weapon == item){
+      player.weapon.data[1] = false;
+      player.weapon = null;
+      GameManager.game.logs.push(`${item.name}を外した`);
+      return true;
+    }
+    if (player.weapon){
+      player.weapon.data[1] = false;
+      item.data[1] = true;
+      player.weapon = item;
+    }else {
+      item.data[1] = true;
+      player.weapon = item;
+    }
+
+    GameManager.game.logs.push(`${item.name}を装備した`);
+
+    return true;
+  }
+
   abdicate(i) {
     var player = GameManager.game.player;
     var position = player.isPosition();
@@ -80,6 +102,13 @@ class SceneItem {
     }
 
     GameManager.game.logs.push(`${player.personalEffects[i].name}を捨てた`);
+    if (player.personalEffects[i].effect == "weapon"){
+      player.weapon.data[1] = false;
+      player.weapon = null;
+    }else if (player.personalEffects[i].effect == "protector") {
+      player.protector.data[1] = false;
+      player.protector = null;
+    }
     var abdicate = player.personalEffects.splice(i, 1);
     abdicate[0].position = position;
     itemMap.push(abdicate[0]);

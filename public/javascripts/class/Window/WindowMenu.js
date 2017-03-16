@@ -191,11 +191,28 @@ class WindowMenu {
 
     context.fillText(`現在のポイント : ${player.point}P`, x+20, y+70, 425);
 
+    context.font = "20px normal";
+    if (player.weapon){
+      var weapon = player.weapon.data[0];
+      context.fillText(`武器 : ${player.weapon.name}`, x+20, y+100);
+    }else {
+      var weapon = 0;
+      context.fillText(`武器 : なし`, x+20, y+100);
+    }
+
+    if (player.protector){
+      var protector = player.protector.data[0];
+      context.fillText(`防具 : ${player.protector.name}`, x+20, y+125, 425);
+    }else {
+      var protector = 0;
+      context.fillText(`防具 : なし`, x+20, y+125, 425);
+    }
+
     // ステータス
     context.font = "20px normal";
     context.fillText(`体力 : ${player.status.hp}/${player.status.maxhp}`, x+470, y+40);
-    context.fillText(`攻撃力 : ${player.status.attack}`, x+450, y+60);
-    context.fillText(`防御力 : ${player.status.attack}`, x+450, y+80);
+    context.fillText(`攻撃力 : ${player.status.attack + weapon}`, x+450, y+60);
+    context.fillText(`防御力 : ${player.status.defense + protector}`, x+450, y+80);
     context.fillText(`満腹度 : ${player.status.stomach}%`, x+450, y+100);
   }
 }

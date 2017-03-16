@@ -1,6 +1,6 @@
 class GameItem {
   init() {
-    this.category = 2;
+    this.category = 3;
     this.recovering = [
       {
         name: "テスト回復アイテム",
@@ -24,6 +24,30 @@ class GameItem {
         position: [0, 0],
       },
     ]
+
+    this.weapon = [
+      {
+        name: "テスト用武器",
+        effect: "weapon",
+        data: [10, false],
+        canUse: Infinity,
+        description: "テスト用の武器1号",
+        image: GameManager.game.image.item[2],
+        position: [0, 0],
+      }
+    ]
+
+    this.protector = [
+      {
+        name: "テスト用防具",
+        effect: "protector",
+        data: [10, false],
+        canUse: Infinity,
+        description: "テスト用の防具1号",
+        image: GameManager.game.image.item[3],
+        position: [0, 0],
+      }
+    ]
   }
 
   set(x, y) {
@@ -42,6 +66,24 @@ class GameItem {
       var item = $.extend(true, {}, this.food[rand]);
       item.position[0] = x;
       item.position[1] = y;
+      item.description += x+y
+      return item
+    }else if (rand == 2) {
+      rand = Math.floor(Math.random() * this.weapon.length);
+
+      var item = $.extend(true, {}, this.weapon[rand]);
+      item.position[0] = x;
+      item.position[1] = y;
+      item.name += x+y
+      item.description += x+y
+      return item
+    }else if (rand == 3) {
+      rand = Math.floor(Math.random() * this.protector.length);
+
+      var item = $.extend(true, {}, this.protector[rand]);
+      item.position[0] = x;
+      item.position[1] = y;
+      item.name += x+y
       item.description += x+y
       return item
     }

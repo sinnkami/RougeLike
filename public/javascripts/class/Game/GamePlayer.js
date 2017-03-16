@@ -26,6 +26,9 @@ class GamePlayer {
       critical: 5
     }
 
+    this.weapon = null;
+    this.protector = null;
+
     this.personalEffects = [];
     this.personalEffectsSize = 20;
 
