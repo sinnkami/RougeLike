@@ -34,23 +34,20 @@ router.post(`/score`, function (req, res) {
 })
 
 router.get('/ranking', function (req, res) {
-  res.render('ranking', { title: "RougeLike" });
-})
-
-router.post('/ranking', function (req, res) {
   pg.connect(connectionString, (error, client) => {
     if (error) { throw error; }
     var query = client.query('SELECT * FROM score ORDER BY score DESC LIMIT 100',
     [],
     (err, result) => {
       if (err) { throw err; }
-      res.json(result);
+      res.render('ranking', {
+        title: "RougeLike",
+         data: result
+      });
       client.end((err) => {
         if (err) { throw err; }
-
       });
     });
   });
 })
-
 module.exports = router;

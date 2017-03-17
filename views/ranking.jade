@@ -18,5 +18,15 @@ html
           th 最大HP
           th 攻撃力
           th 防御力
+          
+        - for (var i = 0; i < data.rows.length; i++)
+          tr
+            th=i+1
+            th=data.rows[i].game_name
+            th=data.rows[i].score
+            th=data.rows[i].lv
+            th=data.rows[i].maxhp
+            th=data.rows[i].attack
+            th=data.rows[i].defense
         
     a(href="/") 戻る
