@@ -28,7 +28,6 @@ class SceneStairs {
 
   event() {
     var key = GameManager.game.key;
-    key.event();
 
     if (key.input.up){
       key.input.up = false;

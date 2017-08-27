@@ -27,6 +27,7 @@ class Manager {
     this.game.item.init();
 
     this.game.key.init();
+    this.game.key.event();
 
     this.scene.move.init();
     this.game.player.init();
@@ -53,7 +54,6 @@ class Manager {
       // デバッグ用 =begin
       // =end
 
-      this.game.key.event();
       this.scene.move.event();
 
       for (var i = 0; i < this.game.map.items.length; i++){

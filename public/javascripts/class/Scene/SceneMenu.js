@@ -60,7 +60,6 @@ class SceneMenu {
   event() {
     var key = GameManager.game.key;
     var menu = GameManager.window.menu;
-    key.event();
 
     if (key.input.back){
       key.input.back = false;
@@ -152,7 +151,6 @@ class SceneMenu {
 
   mapEvent() {
     var key = GameManager.game.key;
-    key.event();
 
     if (key.input.back){
       key.input.back = false;
@@ -164,7 +162,6 @@ class SceneMenu {
   itemEvent() {
     var key = GameManager.game.key;
     var menu = GameManager.window.menu;
-    key.event();
 
     if (key.input.back){
       key.input.back = false;
@@ -228,7 +225,6 @@ class SceneMenu {
   itemSubEvent(itemNumber) {
     var key = GameManager.game.key;
     var menu = GameManager.window.menu;
-    key.event();
 
     if (key.input.back){
       key.input.back = false;
@@ -261,7 +257,6 @@ class SceneMenu {
   logsEvent() {
     var key = GameManager.game.key;
     var menu = GameManager.window.menu;
-    key.event();
 
     if (key.input.back){
       key.input.back = false;
